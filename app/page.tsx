@@ -28,7 +28,7 @@ export default function HomePage() {
           visual="gauge"
         />
 
-        {/* Spotlight 2: Presumptive vs actual (Reverse layout) */}
+        {/* Spotlight 2: Actual vs Presumptive (Reverse layout) */}
         <SpotlightSection
           reverse
           badgeBg="var(--blue-bg)"
@@ -38,13 +38,13 @@ export default function HomePage() {
               <path d="M6 3v18M18 3v18M3 8l3-3 3 3M15 16l3 3 3-3" />
             </svg>
           }
-          eyebrow="Presumptive vs actual"
+          eyebrow="Actual vs Presumptive"
           title="Two tax paths, one clear answer"
-          body="Presumptive or actual taxation isn't something you should be guessing before a filing deadline. We calculate both — your real profit and your deemed profit — side by side, so choosing the one that works in your favour is simple, not stressful."
+          body="Actual or Presumptive scheme taxation isn't something you should be guessing before a filing deadline. We calculate both — your real profit and your deemed profit — side by side, so choosing the one that works in your favour is simple, not stressful."
           visual="compare"
         />
 
-        {/* Spotlight 3: Cash basis */}
+        {/* Spotlight 3: Receivables mapped to Invoices */}
         <SpotlightSection
           badgeBg="var(--green-bg)"
           badgeStroke="var(--green-ic)"
@@ -54,7 +54,7 @@ export default function HomePage() {
               <path d="M9 12l2 2 4-4" />
             </svg>
           }
-          eyebrow="Cash basis"
+          eyebrow="Receivables mapped to Invoices"
           title="Only count money you actually have"
           body="An invoice isn't income until it's paid. We track what's landed in your account, not just what you've billed — so you're never paying tax on money a client hasn't sent yet. See both the cash side and the accrual side, clearly."
           visual="cash"
