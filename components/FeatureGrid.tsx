@@ -25,8 +25,7 @@ export function FeatureGrid() {
             </div>
             <h4>Your GST position, always current</h4>
             <p>
-              Output tax, input credit, what's payable, what's claimed — one clear number, always up to date. No piecing
-              it together from three tabs the night before a filing.
+              Output tax, input credit, what's payable, what's claimed — no more stringing it together from three different tabs the night before a filing. One clear number, always up to date.
             </p>
           </div>
 
@@ -37,10 +36,9 @@ export function FeatureGrid() {
                 <path d="M14 3v4h4M9 12h6M9 16h6" />
               </svg>
             </div>
-            <h4>Everything your CA will ask for, already stacked</h4>
+            <h4>All your business documentation, already stacked</h4>
             <p>
-              Contracts, invoices, receipts — stored against the right client the moment they matter, not hunted down
-              three days before tax season.
+              Proposals, contracts, invoices and receipts stay organised against the right client, right when they matter — so you’re never scrambling to find them when you need it or when your CA asks; you already have the answer.
             </p>
           </div>
 
