@@ -77,11 +77,11 @@ export function SystemsArcCarousel() {
                         {r.type === "compare" && (
                           <div className="card-compare-body">
                             <div className="compare-mini-cols">
-                              <div className="cmini">
+                              <div className="cmini win">
                                 <span className="clbl">Deemed (44ADA)</span>
                                 <span className="camt">{r.deemed}</span>
                               </div>
-                              <div className="cmini win">
+                              <div className="cmini">
                                 <span className="clbl">Actual Books</span>
                                 <span className="camt">{r.actual}</span>
                               </div>

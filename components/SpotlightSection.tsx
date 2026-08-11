@@ -59,16 +59,16 @@ export function SpotlightSection({
 
           {visual === "compare" && (
             <div className="compare-row">
-              <div className="compare-col">
+              <div className="compare-col win">
                 <div className="clabel">Deemed profit</div>
                 <div className="cnum">₹8.2L</div>
                 <div className="cnote">Presumptive scheme · 50% of receipts</div>
+                <div className="compare-badge">Better for you</div>
               </div>
-              <div className="compare-col win">
+              <div className="compare-col">
                 <div className="clabel">Actual profit</div>
                 <div className="cnum">₹9.6L</div>
                 <div className="cnote">From your books, expenses deducted</div>
-                <div className="compare-badge">Better for you</div>
               </div>
             </div>
           )}
