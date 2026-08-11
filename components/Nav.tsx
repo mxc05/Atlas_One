@@ -49,7 +49,7 @@ export function Nav() {
             Log in
           </Link>
           <Link className="btn btn-black" href={isPricing ? "/pricing#plans" : "/#cta"}>
-            Get Atlas free
+            Get Atlas One
           </Link>
         </div>
       </div>
