@@ -219,8 +219,8 @@ export const personas: Persona[] = [
     bg: 'var(--purple-ic)',
   },
   {
-    initials: 'CA',
-    who: 'The CA',
+    initials: 'TC',
+    who: 'The Tax Consultant',
     title: 'Secondary user',
     body: 'Not a daily user — a periodic one. Needs a clean, exportable yearly view, readable at a glance without learning anyone\'s system.',
     bg: 'var(--green-ic)',
