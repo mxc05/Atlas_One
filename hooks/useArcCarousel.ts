@@ -13,6 +13,7 @@ export type CardRenderState = {
   style: React.CSSProperties;
   motionStyle: React.CSSProperties;
   visible: boolean;
+  isHovered: boolean;
 };
 
 export function useArcCarousel(regions: SystemRegion[]) {
@@ -26,14 +27,17 @@ export function useArcCarousel(regions: SystemRegion[]) {
   const velocityRef = useRef(0);
   const visualMotionRef = useRef(0);
   const lastFrameValueRef = useRef(-1);
+
   const manualRef = useRef(false);
   const draggingRef = useRef(false);
   const draggedRef = useRef(false);
-  const startXRef = useRef(0);
+  const startYRef = useRef(0);
   const startValueRef = useRef(-1);
   const lastWheelRef = useRef(0);
   const hoveredLogicalRef = useRef<number | null>(null);
+
   const stageWidthRef = useRef(234);
+  const stageHeightRef = useRef(350);
 
   const takeControl = useCallback(() => {
     manualRef.current = true;
@@ -78,11 +82,12 @@ export function useArcCarousel(regions: SystemRegion[]) {
     const logicalCards: number[] = [];
     for (let i = -7; i < 12; i++) logicalCards.push(i);
 
-    const updateStageWidth = () => {
+    const updateStageDimensions = () => {
       stageWidthRef.current = stage.clientWidth || 234;
+      stageHeightRef.current = stage.clientHeight || 350;
     };
 
-    updateStageWidth();
+    updateStageDimensions();
 
     const onWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) < 4) return;
@@ -96,8 +101,9 @@ export function useArcCarousel(regions: SystemRegion[]) {
       takeControl();
       draggingRef.current = true;
       draggedRef.current = false;
-      startXRef.current = e.clientX;
+      startYRef.current = e.clientY;
       startValueRef.current = valueRef.current;
+      stage.classList.add("dragging");
       try {
         stage.setPointerCapture(e.pointerId);
       } catch {}
@@ -105,15 +111,16 @@ export function useArcCarousel(regions: SystemRegion[]) {
 
     const onPointerMove = (e: PointerEvent) => {
       if (!draggingRef.current) return;
-      const delta = e.clientX - startXRef.current;
-      if (Math.abs(delta) > 5) draggedRef.current = true;
-      valueRef.current = startValueRef.current + delta / (stageWidthRef.current * 0.34);
+      const deltaY = e.clientY - startYRef.current;
+      if (Math.abs(deltaY) > 4) draggedRef.current = true;
+      valueRef.current = startValueRef.current - deltaY / (stageHeightRef.current * 0.45);
       targetRef.current = valueRef.current;
     };
 
     const onPointerUp = (e: PointerEvent) => {
       if (!draggingRef.current) return;
       draggingRef.current = false;
+      stage.classList.remove("dragging");
       targetRef.current = Math.round(valueRef.current);
       try {
         stage.releasePointerCapture(e.pointerId);
@@ -128,10 +135,10 @@ export function useArcCarousel(regions: SystemRegion[]) {
 
     let resizeObserver: ResizeObserver | null = null;
     if (typeof ResizeObserver !== "undefined") {
-      resizeObserver = new ResizeObserver(updateStageWidth);
+      resizeObserver = new ResizeObserver(updateStageDimensions);
       resizeObserver.observe(stage);
     }
-    window.addEventListener("resize", updateStageWidth);
+    window.addEventListener("resize", updateStageDimensions);
 
     const started = performance.now();
 
@@ -140,6 +147,10 @@ export function useArcCarousel(regions: SystemRegion[]) {
         valueRef.current = 0;
         targetRef.current = 0;
       } else if (!manualRef.current) {
+        // 5.3s presentation loop:
+        // 0.0 - 2.1s: move from -1 to 0
+        // 2.1 - 3.72s (1.62s): hold at 0
+        // 3.72 - 5.3s (1.58s): move back from 0 to -1
         const time = ((now - started) % 5300) / 1000;
         let next = -1;
         if (time < 2.1) next = -1 + easeInOutCubic(time / 2.1);
@@ -201,6 +212,7 @@ export function useArcCarousel(regions: SystemRegion[]) {
           dataIndex,
           data,
           visible,
+          isHovered,
           style: {
             opacity: visible ? clamp(1 - edge * 0.52, 0, 1) : 0,
             filter: `blur(${edge * (2.5 + Math.abs(travel) * 1.4)}px)`,
@@ -226,7 +238,7 @@ export function useArcCarousel(regions: SystemRegion[]) {
       stage.removeEventListener("pointerup", onPointerUp);
       stage.removeEventListener("pointercancel", onPointerUp);
       viewport.removeEventListener("wheel", onWheel);
-      window.removeEventListener("resize", updateStageWidth);
+      window.removeEventListener("resize", updateStageDimensions);
       if (resizeObserver) resizeObserver.disconnect();
       cancelAnimationFrame(animId);
     };

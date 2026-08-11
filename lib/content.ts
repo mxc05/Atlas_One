@@ -1,9 +1,18 @@
 export type SystemRegion = {
+  id: string;
   kicker: string;
   num: string;
   title: string;
-  items: string[];
-  theme: 'ink' | 'paper' | 'signal';
+  details: string;
+  theme: 'ink' | 'paper' | 'signal' | 'coral';
+  type: 'numeral' | 'steps' | 'stats' | 'compare' | 'statement' | 'brief' | 'orbital';
+  steps?: string[];
+  statVal?: string;
+  statLabel?: string;
+  deemed?: string;
+  actual?: string;
+  statement?: string;
+  status?: string;
 };
 
 export type Persona = {
@@ -42,11 +51,76 @@ export const heroMockupInvoices = [
 ];
 
 export const systemRegions: SystemRegion[] = [
-  { theme: 'signal', kicker: 'Region I', num: '01', title: 'Setup & Reference', items: ['Profile', 'Work Type', 'Accounts'] },
-  { theme: 'ink', kicker: 'Region II', num: '02', title: 'Relationship & Delivery', items: ['CRM', 'Project'] },
-  { theme: 'paper', kicker: 'Region III', num: '03', title: 'Money In & Out', items: ['Invoices', 'Receipts', 'Credit Notes', 'Bills Payable'] },
-  { theme: 'signal', kicker: 'Region IV', num: '04', title: 'Tax Position', items: ['GST Ledger', 'PL Statement', 'FY Summary', 'Advance Tax'] },
-  { theme: 'ink', kicker: 'Region V', num: '05', title: 'Compliance & Records', items: ['Document Vault', 'Overdue Alerts'] },
+  {
+    id: 'sys-01',
+    theme: 'signal',
+    kicker: 'SYS / 01 · SETUP',
+    num: '01',
+    title: 'Setup & Reference',
+    details: 'Bank accounts, GST registration defaults, currency conversion rates, and business identity.',
+    type: 'numeral',
+  },
+  {
+    id: 'sys-02',
+    theme: 'ink',
+    kicker: 'SYS / 02 · CRM',
+    num: '02',
+    title: 'Build Momentum',
+    details: 'Client onboarding, scope definitions, and automated retainer scheduling.',
+    type: 'steps',
+    steps: ['01 Client Onboarding', '02 Scope & Milestone', '03 Automatic Billing'],
+  },
+  {
+    id: 'sys-03',
+    theme: 'paper',
+    kicker: 'SYS / 03 · CASHFLOW',
+    num: '03',
+    title: 'Useful by Design',
+    details: 'Real-time cash-basis ledger tracking money received vs money billed.',
+    type: 'stats',
+    statVal: '₹4.38L',
+    statLabel: '30-day received income',
+  },
+  {
+    id: 'sys-04',
+    theme: 'coral',
+    kicker: 'SYS / 04 · TAX',
+    num: '04',
+    title: 'Presumptive vs Actual',
+    details: 'Calculate deemed 50% profit (Section 44ADA) against real books side by side.',
+    type: 'compare',
+    deemed: '₹8.2L',
+    actual: '₹9.6L',
+  },
+  {
+    id: 'sys-05',
+    theme: 'ink',
+    kicker: 'SYS / 05 · VAULT',
+    num: '05',
+    title: 'Find the Signal',
+    details: 'Everything your CA will ask for, organized automatically when invoices land.',
+    type: 'statement',
+    statement: '"One real event updates every downstream ledger instantly."',
+  },
+  {
+    id: 'sys-06',
+    theme: 'paper',
+    kicker: 'SYS / 06 · GST',
+    num: '06',
+    title: 'Threshold Watch',
+    details: 'Quietly monitoring your annual billing ceiling before registration becomes urgent.',
+    type: 'brief',
+    status: '72% of ₹20L ceiling · FY 2026-27',
+  },
+  {
+    id: 'sys-07',
+    theme: 'signal',
+    kicker: 'SYS / 07 · ECOSYSTEM',
+    num: '07',
+    title: 'Connected Systems',
+    details: '15 integrated modules flowing into one unified Financial Year summary.',
+    type: 'orbital',
+  },
 ];
 
 export const personas: Persona[] = [

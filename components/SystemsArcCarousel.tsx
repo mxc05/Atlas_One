@@ -27,7 +27,7 @@ export function SystemsArcCarousel() {
               return (
                 <article
                   key={card.logical}
-                  className={`arc-card ${r.theme}`}
+                  className={`arc-card ${r.theme} ${card.isHovered ? "hovered" : ""}`}
                   aria-label={r.title}
                   style={card.style}
                   onMouseEnter={() => handleMouseEnter(card.logical)}
@@ -37,15 +37,97 @@ export function SystemsArcCarousel() {
                   <div className="arc-card-motion" style={card.motionStyle}>
                     <div className="arc-surface">
                       <header>
-                        <span>{r.kicker}</span>
-                        <span>SYS / {r.num}</span>
+                        <span className="mono-label">{r.kicker}</span>
+                        <span className="mono-num">{r.num}</span>
                       </header>
-                      <h4>{r.title}</h4>
-                      <ul>
-                        {r.items.map((it, idx) => (
-                          <li key={idx}>{it}</li>
-                        ))}
-                      </ul>
+
+                      <div className="arc-card-content">
+                        <h4>{r.title}</h4>
+
+                        {r.type === "numeral" && (
+                          <div className="card-numeral-body">
+                            <p>{r.details}</p>
+                            <span className="numeral-watermark">01</span>
+                          </div>
+                        )}
+
+                        {r.type === "steps" && (
+                          <div className="card-steps-body">
+                            <p className="card-desc">{r.details}</p>
+                            <ul className="mini-steps">
+                              {r.steps?.map((step, idx) => (
+                                <li key={idx}>
+                                  <span className="sdot" /> {step}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {r.type === "stats" && (
+                          <div className="card-stats-body">
+                            <div className="stat-value">{r.statVal}</div>
+                            <div className="stat-label">{r.statLabel}</div>
+                            <p className="card-desc" style={{ marginTop: "10px" }}>
+                              {r.details}
+                            </p>
+                          </div>
+                        )}
+
+                        {r.type === "compare" && (
+                          <div className="card-compare-body">
+                            <div className="compare-mini-cols">
+                              <div className="cmini">
+                                <span className="clbl">Deemed (44ADA)</span>
+                                <span className="camt">{r.deemed}</span>
+                              </div>
+                              <div className="cmini win">
+                                <span className="clbl">Actual Books</span>
+                                <span className="camt">{r.actual}</span>
+                              </div>
+                            </div>
+                            <p className="card-desc" style={{ marginTop: "12px" }}>
+                              {r.details}
+                            </p>
+                          </div>
+                        )}
+
+                        {r.type === "statement" && (
+                          <div className="card-statement-body">
+                            <blockquote className="quote-text">{r.statement}</blockquote>
+                            <p className="card-desc">{r.details}</p>
+                          </div>
+                        )}
+
+                        {r.type === "brief" && (
+                          <div className="card-brief-body">
+                            <div className="mini-gauge">
+                              <div className="mgauge-bar">
+                                <div className="mgauge-fill" style={{ width: "72%" }} />
+                              </div>
+                              <span className="mgauge-status">{r.status}</span>
+                            </div>
+                            <p className="card-desc">{r.details}</p>
+                          </div>
+                        )}
+
+                        {r.type === "orbital" && (
+                          <div className="card-orbital-body">
+                            <div className="orbital-svg-wrap">
+                              <svg viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="40" r="28" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeDasharray="3 3" />
+                                <circle cx="120" cy="40" r="28" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeDasharray="3 3" />
+                                <path d="M40 40 Q80 15 120 40 Q80 65 40 40" stroke="currentColor" strokeWidth="1.8" />
+                                <circle cx="40" cy="40" r="4" fill="currentColor" />
+                                <circle cx="120" cy="40" r="4" fill="currentColor" />
+                                <circle cx="80" cy="40" r="5" fill="#3d8a52" />
+                              </svg>
+                            </div>
+                            <p className="card-desc">{r.details}</p>
+                          </div>
+                        )}
+                      </div>
+
                       <div className="arc-badge">{r.num}</div>
                     </div>
                   </div>
@@ -55,11 +137,7 @@ export function SystemsArcCarousel() {
           </div>
         </div>
 
-        <div className="arc-hint">
-          <span>Drag</span>
-          <i />
-          <span>Scroll</span>
-        </div>
+        <div className="arc-bottom-hint">DRAG — SCROLL</div>
 
         <div className="relation-note" style={{ marginTop: "56px" }}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
