@@ -25,8 +25,8 @@ export function Hero() {
           <Link href="#cta" className="btn btn-black btn-lg">
             Get Atlas One
           </Link>
-          <Link href="#highlights" className="btn btn-outline btn-lg">
-            See how it works
+          <Link href="#highlights" className="btn btn-blue btn-lg">
+            Book a Demo
           </Link>
         </div>
         <div className="hero-note">
