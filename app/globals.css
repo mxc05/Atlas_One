@@ -1339,12 +1339,44 @@ footer .brand-name {
   height: 9px;
   border-radius: 50%;
   flex: none;
+  position: relative;
 }
 
-.dot.red { background: var(--red); }
-.dot.amber { background: var(--amber); }
-.dot.green { background: var(--green); }
-.dot.grey { background: var(--grey); }
+@keyframes statusPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 3px var(--glow-color, rgba(0,0,0,0.1));
+    transform: scale(0.96);
+  }
+  50% {
+    box-shadow: 0 0 8px var(--glow-color, rgba(0,0,0,0.2)), 0 0 16px var(--glow-color, rgba(0,0,0,0.35));
+    transform: scale(1.12);
+  }
+}
+
+.dot.red {
+  background: var(--red);
+  --glow-color: rgba(224, 67, 61, 0.8);
+  animation: statusPulseGlow 2.5s ease-in-out infinite;
+  animation-delay: 0s;
+}
+.dot.amber {
+  background: var(--amber);
+  --glow-color: rgba(223, 171, 47, 0.9);
+  animation: statusPulseGlow 2.5s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+.dot.green {
+  background: var(--green);
+  --glow-color: rgba(47, 158, 88, 0.9);
+  animation: statusPulseGlow 2.5s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+.dot.grey {
+  background: var(--grey);
+  --glow-color: rgba(155, 154, 151, 0.65);
+  animation: statusPulseGlow 2.5s ease-in-out infinite;
+  animation-delay: 1.6s;
+}
 
 .dot.check {
   width: 14px;
@@ -1352,6 +1384,9 @@ footer .brand-name {
   border-radius: 50%;
   background: var(--green-bg);
   position: relative;
+  --glow-color: rgba(61, 138, 82, 0.7);
+  animation: statusPulseGlow 2.5s ease-in-out infinite;
+  animation-delay: 1.2s;
 }
 
 .dot.check::after {
@@ -1377,6 +1412,9 @@ footer .brand-name {
   background: var(--amber);
   display: block;
   border-radius: 1px;
+  --glow-color: rgba(223, 171, 47, 0.85);
+  animation: statusPulseGlow 2.5s ease-in-out infinite;
+  animation-delay: 2s;
 }
 
 .legend-cap {
@@ -1684,10 +1722,11 @@ footer {
 }
 
 .plan-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  align-items: stretch;
+  display: flex;
+  justify-content: center;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .plan-card {
@@ -1870,75 +1909,95 @@ footer {
   border-bottom: none;
 }
 
-.faq {
+/* ============ FAQ SECTION (2-COLUMN RAZORPAY STYLE) ============ */
+.faq-section {
   padding: 100px 0;
-  max-width: 760px;
-  margin: 0 auto;
+  border-top: 1px solid var(--border-soft);
+  background: var(--bg);
+}
+
+.faq-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.faq-left .faq-title {
+  font-size: clamp(32px, 3.8vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -.03em;
+  position: sticky;
+  top: 100px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .faq-item {
-  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
-.faq-item:last-child {
-  border-bottom: 1px solid var(--border);
+.faq-item:first-child {
+  border-top: 1px solid var(--border);
 }
 
 .faq-item summary {
   list-style: none;
   cursor: pointer;
-  padding: 22px 4px;
+  padding: 22px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 15.5px;
+  font-size: 17px;
   font-weight: 600;
-  gap: 16px;
+  color: var(--ink);
+  gap: 20px;
+  transition: color 0.15s ease;
+}
+
+.faq-item summary:hover {
+  color: var(--blue);
 }
 
 .faq-item summary::-webkit-details-marker {
   display: none;
 }
 
-.faq-item summary .plus {
-  width: 20px;
-  height: 20px;
+.faq-item summary .chevron-icon {
+  width: 18px;
+  height: 18px;
   flex: none;
-  position: relative;
+  stroke: #4a4946;
+  transition: transform 0.25s ease, stroke 0.15s ease;
 }
 
-.faq-item summary .plus::before, .faq-item summary .plus::after {
-  content: "";
-  position: absolute;
-  background: var(--ink);
-  border-radius: 2px;
-  transition: transform .2s ease;
+.faq-item[open] summary .chevron-icon {
+  transform: rotate(180deg);
+  stroke: var(--blue);
 }
 
-.faq-item summary .plus::before {
-  width: 14px;
-  height: 2px;
-  top: 9px;
-  left: 3px;
+.faq-item p.a-text {
+  padding: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #37352f;
 }
 
-.faq-item summary .plus::after {
-  width: 2px;
-  height: 14px;
-  top: 3px;
-  left: 9px;
+@media(max-width: 860px) {
+  .faq-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .faq-left .faq-title {
+    position: static;
+  }
 }
 
-.faq-item[open] summary .plus::after {
-  transform: rotate(90deg) translate(0, 0);
-  opacity: 0;
-}
-
-.faq-item p {
-  padding: 0 4px 22px;
-  font-size: 14.5px;
-  max-width: 640px;
-}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
