@@ -80,7 +80,7 @@ export function FeatureGrid() {
             </div>
           </div>
 
-          <div className="fcard" style={{ gridColumn: "span 3", display: "flex", alignItems: "center", gap: "20px" }}>
+          <div className="fcard fullcard">
             <div className="icon-badge" style={{ background: "var(--green-bg)", flex: "none" }}>
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-ic)" strokeWidth="1.8">
                 <rect x="3" y="3" width="7" height="7" rx="1" />

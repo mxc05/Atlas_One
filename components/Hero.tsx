@@ -19,18 +19,19 @@ export function Hero() {
           Your business, <span className="accent">finally connected</span>.
         </h1>
         <p className="lede">
-          Atlas One brings your clients, invoices, payments, expenses and GST position into one workspace — so one real
-          event updates everything downstream, automatically.
+          Atlas One is a Notion-based app which brings your clients, invoices, payments, expenses, GST position and your business financials into one workspace — so recording one real event updates everything downstream, automatically.
         </p>
         <div className="hero-ctas">
           <Link href="#cta" className="btn btn-black btn-lg">
-            Get Atlas free
+            Get Atlas One
           </Link>
           <Link href="#highlights" className="btn btn-outline btn-lg">
             See how it works
           </Link>
         </div>
-        <div className="hero-note">No card required · 15 connected systems · Built for GST-era freelancing</div>
+        <div className="hero-note">
+          15 connected systems · One Workspace · One-time Payment · Lifetime Access
+        </div>
       </div>
       <div className="reveal" ref={mockupRef}>
         <HeroMockup />
