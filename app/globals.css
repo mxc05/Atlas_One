@@ -1222,9 +1222,16 @@ footer .brand-name {
 /* Card Themes */
 .arc-card.ink .arc-surface {
   background: var(--ink);
-  color: #f4f1e8;
+  color: #ffffff;
 }
-.arc-card.ink .arc-card-content p { color: #c7c5bb; }
+.arc-card.ink header,
+.arc-card.ink .mono-label,
+.arc-card.ink .mono-num,
+.arc-card.ink h4 {
+  color: #ffffff;
+  opacity: 1;
+}
+.arc-card.ink .arc-card-content p { color: #d0cecf; }
 
 .arc-card.paper .arc-surface {
   background: #ffffff;
