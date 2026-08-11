@@ -80,7 +80,9 @@ export function useArcCarousel(regions: SystemRegion[]) {
     let animId: number;
 
     const logicalCards: number[] = [];
-    for (let i = -7; i < 12; i++) logicalCards.push(i);
+    const minSlot = -Math.max(10, regions.length);
+    const maxSlot = Math.max(15, regions.length * 2);
+    for (let i = minSlot; i < maxSlot; i++) logicalCards.push(i);
 
     const updateStageDimensions = () => {
       stageWidthRef.current = stage.clientWidth || 234;
