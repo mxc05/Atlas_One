@@ -230,10 +230,11 @@ header.nav.scrolled {
   justify-content: center;
 }
 
-.brand .mark svg {
+.brand .mark svg,
+.brand .mark .brand-logo-mark {
   width: 15px;
   height: 15px;
-  stroke: #fff;
+  fill: #ffffff;
 }
 
 .brand-text {
@@ -2062,6 +2063,35 @@ footer {
 
 .btn-animated-cta-black .btn-icon-circle svg {
   stroke: #111111;
+}
+
+/* Outline Variant */
+.btn-animated-cta-outline {
+  background-color: transparent;
+  color: #111111;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow: none;
+}
+
+.btn-animated-cta-outline:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.35);
+  padding: 0 24px 0 48px;
+}
+
+.btn-animated-cta-outline .btn-icon-circle {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+.btn-animated-cta-outline .btn-icon-circle svg {
+  stroke: #ffffff;
+}
+
+.btn-animated-cta.w-full {
+  width: 100%;
+  min-width: 100%;
+  justify-content: center;
 }
 
 .btn-animated-cta:active {

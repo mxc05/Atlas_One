@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { AnimatedButton } from "./AnimatedButton";
 
 const INDIAN_STATES = [
   "Andhra Pradesh",
@@ -138,9 +139,15 @@ export function DemoModal() {
             <p className="card-subtext">
               Thanks <strong>{formData.name}</strong>! We've received your details and will send a personalized calendar invite to <strong>{formData.email}</strong> within 24 hours.
             </p>
-            <button className="btn btn-black btn-full" style={{ marginTop: "20px" }} onClick={closeDemoModal}>
-              Done
-            </button>
+            <div style={{ marginTop: "20px" }}>
+              <AnimatedButton
+                text="Done"
+                variant="black"
+                iconDirection="check"
+                onClick={closeDemoModal}
+                className="w-full"
+              />
+            </div>
           </div>
         ) : (
           <div className="card-story-inner">
@@ -215,13 +222,14 @@ export function DemoModal() {
                     />
                   </div>
 
-                  <div className="form-actions" style={{ marginTop: "12px" }}>
-                    <button
+                  <div className="form-actions" style={{ marginTop: "16px" }}>
+                    <AnimatedButton
+                      text="Continue"
+                      variant="black"
+                      iconDirection="up-right"
                       type="submit"
-                      className="btn btn-black btn-full card-action-btn"
-                    >
-                      Continue →
-                    </button>
+                      className="w-full"
+                    />
                   </div>
                 </form>
               </div>
@@ -302,23 +310,27 @@ export function DemoModal() {
 
                   <div
                     className="form-actions multi-btn"
-                    style={{ marginTop: "12px", display: "flex", gap: "10px" }}
+                    style={{ marginTop: "14px", display: "flex", gap: "10px" }}
                   >
-                    <button
-                      type="button"
-                      className="btn btn-outline"
-                      style={{ flex: 1, padding: "12px", borderRadius: "10px" }}
-                      onClick={() => handlePrevStep(1)}
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="btn btn-black card-action-btn"
-                      style={{ flex: 2 }}
-                    >
-                      Continue →
-                    </button>
+                    <div style={{ flex: 1 }}>
+                      <AnimatedButton
+                        text="Back"
+                        variant="outline"
+                        iconDirection="left"
+                        type="button"
+                        onClick={() => handlePrevStep(1)}
+                        className="w-full"
+                      />
+                    </div>
+                    <div style={{ flex: 2 }}>
+                      <AnimatedButton
+                        text="Continue"
+                        variant="black"
+                        iconDirection="up-right"
+                        type="submit"
+                        className="w-full"
+                      />
+                    </div>
                   </div>
                 </form>
               </div>
@@ -352,23 +364,27 @@ export function DemoModal() {
 
                   <div
                     className="form-actions multi-btn"
-                    style={{ marginTop: "14px", display: "flex", gap: "10px" }}
+                    style={{ marginTop: "16px", display: "flex", gap: "10px" }}
                   >
-                    <button
-                      type="button"
-                      className="btn btn-outline"
-                      style={{ flex: 1, padding: "12px", borderRadius: "10px" }}
-                      onClick={() => handlePrevStep(2)}
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="btn btn-black card-action-btn"
-                      style={{ flex: 2 }}
-                    >
-                      Submit Demo Request
-                    </button>
+                    <div style={{ flex: 1 }}>
+                      <AnimatedButton
+                        text="Back"
+                        variant="outline"
+                        iconDirection="left"
+                        type="button"
+                        onClick={() => handlePrevStep(2)}
+                        className="w-full"
+                      />
+                    </div>
+                    <div style={{ flex: 2 }}>
+                      <AnimatedButton
+                        text="Submit Demo Request"
+                        variant="black"
+                        iconDirection="check"
+                        type="submit"
+                        className="w-full"
+                      />
+                    </div>
                   </div>
                 </form>
               </div>

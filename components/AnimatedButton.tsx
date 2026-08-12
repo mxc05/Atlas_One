@@ -14,7 +14,8 @@ export function AtlasLogoIcon({ className = "" }: { className?: string }) {
 
 export type AnimatedButtonProps = {
   text?: string;
-  variant?: "black" | "blue";
+  variant?: "black" | "blue" | "outline";
+  iconDirection?: "up-right" | "right" | "left" | "check" | "atlas";
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   href?: string;
   className?: string;
@@ -26,6 +27,7 @@ export type AnimatedButtonProps = {
 export function AnimatedButton({
   text = "Book a Demo",
   variant,
+  iconDirection = "up-right",
   onClick,
   href,
   className = "",
@@ -49,28 +51,55 @@ export function AnimatedButton({
     }
   };
 
-  const isAtlasButton = activeVariant === "black";
+  const renderIcon = () => {
+    if (iconDirection === "atlas") {
+      return <AtlasLogoIcon className="atlas-logo-svg" />;
+    }
+    if (iconDirection === "left") {
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12 19 5 12 12 5" />
+        </svg>
+      );
+    }
+    if (iconDirection === "right") {
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      );
+    }
+    if (iconDirection === "check") {
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      );
+    }
+    // Default up-right 45-degree arrow
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <line x1="7" y1="17" x2="17" y2="7" />
+        <polyline points="7 7 17 7 17 17" />
+      </svg>
+    );
+  };
 
   const content = (
     <>
       <span className="btn-shine-layer" aria-hidden="true" />
       <span className="btn-text-label">{text}</span>
       <span className="btn-icon-circle" aria-hidden="true">
-        {isAtlasButton ? (
-          <AtlasLogoIcon className="atlas-logo-svg" />
-        ) : (
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="7" y1="17" x2="17" y2="7" />
-            <polyline points="7 7 17 7 17 17" />
-          </svg>
-        )}
+        {renderIcon()}
       </span>
     </>
   );
