@@ -3,6 +3,7 @@ import { Inter, IBM_Plex_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { DemoModal } from "@/components/DemoModal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Nav />
         <main>{children}</main>
         <Footer />
+        <DemoModal />
       </body>
     </html>
   );

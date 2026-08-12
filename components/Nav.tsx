@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AnimatedButton } from "./AnimatedButton";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,9 +49,11 @@ export function Nav() {
           <Link className="nav-signin" href="/#cta">
             Log in
           </Link>
-          <Link className="btn btn-black" href={isPricing ? "/pricing#plans" : "/#cta"}>
-            Get Atlas One
-          </Link>
+          <AnimatedButton
+            text="Get Atlas One"
+            variant="black"
+            href={isPricing ? "/pricing#plans" : "/#cta"}
+          />
         </div>
       </div>
     </header>

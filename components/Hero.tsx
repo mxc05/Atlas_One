@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { HeroCanvas } from "./HeroCanvas";
 import { HeroMockup } from "./HeroMockup";
 import { useReveal } from "@/hooks/useReveal";
+import { AnimatedButton } from "./AnimatedButton";
 
 export function Hero() {
   const mockupRef = useReveal();
@@ -22,12 +22,8 @@ export function Hero() {
           Atlas One is a Notion-based app which brings your clients, invoices, payments, expenses, GST position and your business financials into one workspace — so recording one real event updates everything downstream, automatically.
         </p>
         <div className="hero-ctas">
-          <Link href="#cta" className="btn btn-black btn-lg">
-            Get Atlas One
-          </Link>
-          <Link href="#highlights" className="btn btn-blue btn-lg">
-            Book a Demo
-          </Link>
+          <AnimatedButton text="Get Atlas One" variant="black" href="#cta" />
+          <AnimatedButton text="Book a Demo" variant="blue" />
         </div>
         <div className="hero-note">
           15 connected systems · One Workspace · One-time Payment · Lifetime Access

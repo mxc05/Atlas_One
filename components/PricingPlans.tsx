@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { pricingPlans } from "@/lib/content";
 import { useReveal } from "@/hooks/useReveal";
+import { AnimatedButton } from "./AnimatedButton";
 
 export function PricingPlans() {
   const sectionRef = useReveal();
@@ -21,13 +21,13 @@ export function PricingPlans() {
               </div>
               <div className="plan-sub price-sub">{plan.subMonthly}</div>
               <p className="plan-desc">{plan.desc}</p>
-              <Link
+              <AnimatedButton
+                text={plan.btnText}
+                variant="black"
                 href={plan.btnLink}
-                className={`btn ${plan.featured ? "btn-black" : "btn-outline"} btn-full`}
-              >
-                {plan.btnText}
-              </Link>
-              <ul className="plan-features">
+                className="btn-full"
+              />
+              <ul className="plan-features" style={{ marginTop: "24px" }}>
                 {plan.features.map((feat, fidx) => (
                   <li className={feat.included ? "" : "dim"} key={fidx}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
