@@ -41,6 +41,7 @@ const INDIAN_STATES = [
 export function DemoModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [direction, setDirection] = useState<"next" | "prev">("next");
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -77,6 +78,7 @@ export function DemoModal() {
       document.body.style.overflow = "";
       setSubmitted(false);
       setStep(1);
+      setDirection("next");
     }
   }, [isOpen]);
 
@@ -87,24 +89,32 @@ export function DemoModal() {
   const handleNextStep1 = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) return;
+    setDirection("next");
     setStep(2);
   };
 
   const handleNextStep2 = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.city || !formData.state) return;
+    setDirection("next");
     setStep(3);
+  };
+
+  const handlePrevStep = (targetStep: 1 | 2) => {
+    setDirection("prev");
+    setStep(targetStep);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setDirection("next");
     setSubmitted(true);
   };
 
   return (
     <div className="demo-modal-backdrop" onClick={closeDemoModal}>
       <div
-        className="demo-modal-container"
+        className="demo-card-story-container"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -117,207 +127,253 @@ export function DemoModal() {
         </button>
 
         {submitted ? (
-          <div className="demo-success-state">
+          <div className="demo-success-state card-anim-slide-next">
             <div className="success-icon-wrap">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
-            <h3>Demo Request Received!</h3>
-            <p>
+            <div className="card-eyebrow">COMPLETE — ALL SET</div>
+            <h3 className="card-loud-heading">DEMO REQUEST RECEIVED</h3>
+            <p className="card-subtext">
               Thanks <strong>{formData.name}</strong>! We've received your details and will send a personalized calendar invite to <strong>{formData.email}</strong> within 24 hours.
             </p>
-            <button className="btn btn-black btn-full" style={{ marginTop: "24px" }} onClick={closeDemoModal}>
+            <button className="btn btn-black btn-full" style={{ marginTop: "20px" }} onClick={closeDemoModal}>
               Done
             </button>
           </div>
         ) : (
-          <>
-            <div className="demo-modal-header">
-              <div className="demo-eyebrow">Interactive Walkthrough</div>
-              <h2 id="demoModalTitle">Book a Live Demo</h2>
-              <p className="demo-subtitle">
-                See how Atlas One unifies your clients, invoices, expenses, and GST position into one quiet workspace.
-              </p>
-
+          <div className="card-story-inner">
+            {/* Step Progress Bar */}
+            <div className="card-step-header">
               <div className="demo-step-indicator">
                 <div className={`step-item ${step === 1 ? "active" : step > 1 ? "complete" : ""}`}>
-                  <span className="step-num">1</span>
+                  <span className="step-num">01</span>
                   <span className="step-label">Contact</span>
                 </div>
                 <div className="step-line" />
                 <div className={`step-item ${step === 2 ? "active" : step > 2 ? "complete" : ""}`}>
-                  <span className="step-num">2</span>
-                  <span className="step-label">Setup &amp; Location</span>
+                  <span className="step-num">02</span>
+                  <span className="step-label">Setup</span>
                 </div>
                 <div className="step-line" />
                 <div className={`step-item ${step === 3 ? "active" : ""}`}>
-                  <span className="step-num">3</span>
-                  <span className="step-label">Final Note</span>
+                  <span className="step-num">03</span>
+                  <span className="step-label">Notes</span>
                 </div>
               </div>
             </div>
 
-            {/* PAGE 1 */}
+            {/* PAGE 1: CONTACT INFO */}
             {step === 1 && (
-              <form onSubmit={handleNextStep1} className="demo-modal-form">
-                <div className="form-group">
-                  <label htmlFor="demoName">Full Name *</label>
-                  <input
-                    id="demoName"
-                    type="text"
-                    required
-                    placeholder="e.g. Alex Rivera"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  />
-                </div>
+              <div className={`card-story-step card-anim-slide-${direction}`} key={`step1-${direction}`}>
+                <span className="card-watermark-num" aria-hidden="true">
+                  01
+                </span>
+                <div className="card-eyebrow">01 — CONTACT DETAILS</div>
+                <h2 id="demoModalTitle" className="card-loud-heading">
+                  TELL US WHO YOU ARE
+                </h2>
+                <p className="card-subtext">
+                  Enter your contact details so we can schedule your live walkthrough.
+                </p>
 
-                <div className="form-group">
-                  <label htmlFor="demoEmail">Work Email *</label>
-                  <input
-                    id="demoEmail"
-                    type="email"
-                    required
-                    placeholder="alex@yourstudio.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="demoPhone">Phone Number *</label>
-                  <input
-                    id="demoPhone"
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  />
-                </div>
-
-                <div className="form-actions" style={{ marginTop: "12px" }}>
-                  <button type="submit" className="btn btn-black btn-full" style={{ padding: "14px", borderRadius: "10px", fontWeight: 600 }}>
-                    Continue →
-                  </button>
-                </div>
-              </form>
-            )}
-
-            {/* PAGE 2 */}
-            {step === 2 && (
-              <form onSubmit={handleNextStep2} className="demo-modal-form">
-                <div className="form-row 2col">
+                <form onSubmit={handleNextStep1} className="demo-modal-form">
                   <div className="form-group">
-                    <label htmlFor="demoGst">GST Registered?</label>
-                    <select
-                      id="demoGst"
-                      value={formData.gstRegistered}
-                      onChange={(e) => setFormData({ ...formData, gstRegistered: e.target.value })}
-                    >
-                      <option value="No">No</option>
-                      <option value="Yes">Yes</option>
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="demoWorkType">Your Setup</label>
-                    <select
-                      id="demoWorkType"
-                      value={formData.workType}
-                      onChange={(e) => setFormData({ ...formData, workType: e.target.value })}
-                    >
-                      <option value="Solo Freelancer (1–3 yrs in)">Solo Freelancer (1–3 yrs in)</option>
-                      <option value="Multi-Stream Professional (5+ yrs in)">Multi-Stream Professional (5+ yrs in)</option>
-                      <option value="Small Agency Owner">Small Agency / Studio Owner</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="form-row 2col">
-                  <div className="form-group">
-                    <label htmlFor="demoCity">City *</label>
+                    <label htmlFor="demoName">FULL NAME *</label>
                     <input
-                      id="demoCity"
+                      id="demoName"
                       type="text"
                       required
-                      placeholder="e.g. Mumbai / Bengaluru"
-                      value={formData.city}
-                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      placeholder="e.g. Alex Rivera"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="demoState">State *</label>
-                    <select
-                      id="demoState"
-                      value={formData.state}
-                      onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                    >
-                      {INDIAN_STATES.map((st, idx) => (
-                        <option value={st} key={idx}>
-                          {st}
-                        </option>
-                      ))}
-                    </select>
+                    <label htmlFor="demoEmail">WORK EMAIL *</label>
+                    <input
+                      id="demoEmail"
+                      type="email"
+                      required
+                      placeholder="alex@yourstudio.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    />
                   </div>
-                </div>
 
-                <div className="form-actions multi-btn" style={{ marginTop: "12px", display: "flex", gap: "10px" }}>
-                  <button
-                    type="button"
-                    className="btn btn-outline"
-                    style={{ flex: 1, padding: "14px", borderRadius: "10px" }}
-                    onClick={() => setStep(1)}
-                  >
-                    ← Back
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-black"
-                    style={{ flex: 2, padding: "14px", borderRadius: "10px", fontWeight: 600 }}
-                  >
-                    Continue →
-                  </button>
-                </div>
-              </form>
+                  <div className="form-group">
+                    <label htmlFor="demoPhone">PHONE NUMBER *</label>
+                    <input
+                      id="demoPhone"
+                      type="tel"
+                      required
+                      placeholder="+91 98765 43210"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="form-actions" style={{ marginTop: "12px" }}>
+                    <button
+                      type="submit"
+                      className="btn btn-black btn-full card-action-btn"
+                    >
+                      Continue →
+                    </button>
+                  </div>
+                </form>
+              </div>
             )}
 
-            {/* PAGE 3 */}
+            {/* PAGE 2: SETUP & LOCATION */}
+            {step === 2 && (
+              <div className={`card-story-step card-anim-slide-${direction}`} key={`step2-${direction}`}>
+                <span className="card-watermark-num" aria-hidden="true">
+                  02
+                </span>
+                <div className="card-eyebrow">02 — SETUP &amp; LOCATION</div>
+                <h2 id="demoModalTitle" className="card-loud-heading">
+                  WHERE &amp; HOW YOU WORK
+                </h2>
+                <p className="card-subtext">
+                  Tell us a bit about your setup so we can tailor the demo to your tax workflow.
+                </p>
+
+                <form onSubmit={handleNextStep2} className="demo-modal-form">
+                  <div className="form-row 2col">
+                    <div className="form-group">
+                      <label htmlFor="demoGst">GST REGISTERED?</label>
+                      <select
+                        id="demoGst"
+                        value={formData.gstRegistered}
+                        onChange={(e) => setFormData({ ...formData, gstRegistered: e.target.value })}
+                      >
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="demoWorkType">YOUR SETUP</label>
+                      <select
+                        id="demoWorkType"
+                        value={formData.workType}
+                        onChange={(e) => setFormData({ ...formData, workType: e.target.value })}
+                      >
+                        <option value="Solo Freelancer (1–3 yrs in)">Solo Freelancer (1–3 yrs in)</option>
+                        <option value="Multi-Stream Professional (5+ yrs in)">
+                          Multi-Stream Pro (5+ yrs in)
+                        </option>
+                        <option value="Small Agency Owner">Small Agency / Studio Owner</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="form-row 2col">
+                    <div className="form-group">
+                      <label htmlFor="demoCity">CITY *</label>
+                      <input
+                        id="demoCity"
+                        type="text"
+                        required
+                        placeholder="e.g. Mumbai"
+                        value={formData.city}
+                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="demoState">STATE *</label>
+                      <select
+                        id="demoState"
+                        value={formData.state}
+                        onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                      >
+                        {INDIAN_STATES.map((st, idx) => (
+                          <option value={st} key={idx}>
+                            {st}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div
+                    className="form-actions multi-btn"
+                    style={{ marginTop: "12px", display: "flex", gap: "10px" }}
+                  >
+                    <button
+                      type="button"
+                      className="btn btn-outline"
+                      style={{ flex: 1, padding: "12px", borderRadius: "10px" }}
+                      onClick={() => handlePrevStep(1)}
+                    >
+                      ← Back
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-black card-action-btn"
+                      style={{ flex: 2 }}
+                    >
+                      Continue →
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {/* PAGE 3: PREFERENCES & NOTES */}
             {step === 3 && (
-              <form onSubmit={handleSubmit} className="demo-modal-form">
-                <div className="form-group">
-                  <label htmlFor="demoNote">Specific Questions or Preferred Time (Optional)</label>
-                  <textarea
-                    id="demoNote"
-                    rows={4}
-                    placeholder="Let us know what key features you'd like to explore..."
-                    value={formData.note}
-                    onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                  />
-                </div>
+              <div className={`card-story-step card-anim-slide-${direction}`} key={`step3-${direction}`}>
+                <span className="card-watermark-num" aria-hidden="true">
+                  03
+                </span>
+                <div className="card-eyebrow">03 — YOUR PREFERENCES</div>
+                <h2 id="demoModalTitle" className="card-loud-heading">
+                  WHAT CAN WE SHOW YOU?
+                </h2>
+                <p className="card-subtext">
+                  Share any specific questions or preferred calendar slots for your demo.
+                </p>
 
-                <div className="form-actions multi-btn" style={{ marginTop: "16px", display: "flex", gap: "10px" }}>
-                  <button
-                    type="button"
-                    className="btn btn-outline"
-                    style={{ flex: 1, padding: "14px", borderRadius: "10px" }}
-                    onClick={() => setStep(2)}
+                <form onSubmit={handleSubmit} className="demo-modal-form">
+                  <div className="form-group">
+                    <label htmlFor="demoNote">SPECIFIC QUESTIONS OR PREFERRED TIME (OPTIONAL)</label>
+                    <textarea
+                      id="demoNote"
+                      rows={3}
+                      placeholder="Let us know what key features you'd like to explore..."
+                      value={formData.note}
+                      onChange={(e) => setFormData({ ...formData, note: e.target.value })}
+                    />
+                  </div>
+
+                  <div
+                    className="form-actions multi-btn"
+                    style={{ marginTop: "14px", display: "flex", gap: "10px" }}
                   >
-                    ← Back
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-black"
-                    style={{ flex: 2, padding: "14px", borderRadius: "10px", fontWeight: 600 }}
-                  >
-                    Submit Demo Request
-                  </button>
-                </div>
-              </form>
+                    <button
+                      type="button"
+                      className="btn btn-outline"
+                      style={{ flex: 1, padding: "12px", borderRadius: "10px" }}
+                      onClick={() => handlePrevStep(2)}
+                    >
+                      ← Back
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-black card-action-btn"
+                      style={{ flex: 2 }}
+                    >
+                      Submit Demo Request
+                    </button>
+                  </div>
+                </form>
+              </div>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
