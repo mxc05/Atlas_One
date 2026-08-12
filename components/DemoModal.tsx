@@ -4,18 +4,26 @@ import React, { useState, useEffect } from "react";
 import { AnimatedButton } from "./AnimatedButton";
 
 const INDIAN_STATES = [
+  "Andaman & Nicobar Islands",
   "Andhra Pradesh",
   "Arunachal Pradesh",
   "Assam",
   "Bihar",
-  "Chhattisgarh",
+  "Chandigarh",
+  "Chattisgarh",
+  "Dadra & Nagar Haveli",
+  "Daman & Diu",
+  "Delhi",
   "Goa",
   "Gujarat",
   "Haryana",
   "Himachal Pradesh",
+  "Jammu & Kashmir",
   "Jharkhand",
   "Karnataka",
   "Kerala",
+  "Ladakh",
+  "Lakshadweep",
   "Madhya Pradesh",
   "Maharashtra",
   "Manipur",
@@ -23,6 +31,7 @@ const INDIAN_STATES = [
   "Mizoram",
   "Nagaland",
   "Odisha",
+  "Puducherry",
   "Punjab",
   "Rajasthan",
   "Sikkim",
@@ -32,11 +41,7 @@ const INDIAN_STATES = [
   "Uttar Pradesh",
   "Uttarakhand",
   "West Bengal",
-  "Delhi (NCT)",
-  "Jammu & Kashmir",
-  "Chandigarh",
-  "Puducherry",
-  "Other / Outside India",
+  "Others / Outside India",
 ];
 
 export function DemoModal() {
@@ -44,6 +49,7 @@ export function DemoModal() {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -106,10 +112,23 @@ export function DemoModal() {
     setStep(targetStep);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setDirection("next");
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      await fetch("/api/demo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    } catch (err) {
+      console.error("Demo submission error:", err);
+    } finally {
+      setIsSubmitting(false);
+      setDirection("next");
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -378,10 +397,11 @@ export function DemoModal() {
                     </div>
                     <div style={{ flex: 2 }}>
                       <AnimatedButton
-                        text="Submit Demo Request"
+                        text={isSubmitting ? "Sending..." : "Submit Demo Request"}
                         variant="black"
                         iconDirection="check"
                         type="submit"
+                        disabled={isSubmitting}
                         className="w-full"
                       />
                     </div>

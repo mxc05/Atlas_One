@@ -22,7 +22,7 @@ export function Hero() {
           Atlas One is a Notion-based app which brings your clients, invoices, payments, expenses, GST position and your business financials into one workspace — so recording one real event updates everything downstream, automatically.
         </p>
         <div className="hero-ctas">
-          <AnimatedButton text="Get Atlas One" variant="black" href="#cta" />
+          <AnimatedButton text="Get Atlas One" variant="black" href="/pricing" />
           <AnimatedButton text="Book a Demo" variant="blue" />
         </div>
         <div className="hero-note">

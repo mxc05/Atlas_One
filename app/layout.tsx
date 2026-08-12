@@ -39,8 +39,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${mono.variable} ${lora.variable}`}>
-      <body>
+    <html lang="en" className={`${inter.variable} ${mono.variable} ${lora.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <Nav />
         <main>{children}</main>
         <Footer />

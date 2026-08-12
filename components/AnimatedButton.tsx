@@ -2,15 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
+import { AtlasLogoIcon } from "./AtlasLogoIcon";
 
-export function AtlasLogoIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 100" fill="currentColor" className={className}>
-      <path d="M 50 12 L 86 88 H 70 L 52 48 C 58 60 62 70 54 77 C 44 84 33 76 34 60 C 35 44 45 30 50 12 Z" />
-      <path d="M 24 88 L 34 68 L 44 88 H 24 Z" />
-    </svg>
-  );
-}
+export { AtlasLogoIcon };
 
 export type AnimatedButtonProps = {
   text?: string;
@@ -109,12 +103,29 @@ export function AnimatedButton({
   } ${className}`.trim();
 
   if (href && !disabled) {
+    const isExternal = href.startsWith("http://") || href.startsWith("https://");
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          className={combinedClass}
+          onClick={handleClick}
+          aria-label={ariaLabel || text}
+          target="_blank"
+          rel="noopener noreferrer"
+          suppressHydrationWarning
+        >
+          {content}
+        </a>
+      );
+    }
     return (
       <Link
         href={href}
         className={combinedClass}
         onClick={handleClick}
         aria-label={ariaLabel || text}
+        suppressHydrationWarning
       >
         {content}
       </Link>
@@ -128,6 +139,7 @@ export function AnimatedButton({
       onClick={handleClick}
       disabled={disabled}
       aria-label={ariaLabel || text}
+      suppressHydrationWarning
     >
       {content}
     </button>

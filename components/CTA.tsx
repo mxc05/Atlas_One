@@ -31,8 +31,8 @@ export function CTA() {
               setSubmitted(true);
             }}
           >
-            <input type="email" placeholder="you@studio.com" required />
-            <button className="btn btn-black" type="submit">
+            <input type="email" placeholder="you@studio.com" required suppressHydrationWarning />
+            <button className="btn btn-black" type="submit" suppressHydrationWarning>
               Join waitlist
             </button>
           </form>

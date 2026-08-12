@@ -3,20 +3,36 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatedButton, AtlasLogoIcon } from "./AnimatedButton";
+import { AnimatedButton } from "./AnimatedButton";
+import { AtlasLogoIcon } from "./AtlasLogoIcon";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [showCta, setShowCta] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      if (pathname === "/") {
+        const heroSection = document.querySelector("section.hero");
+        if (heroSection) {
+          const rect = heroSection.getBoundingClientRect();
+          // Show navbar CTA strictly after the user crosses the entire Hero section
+          setShowCta(rect.bottom <= 80);
+        } else {
+          setShowCta(window.scrollY > 800);
+        }
+      } else {
+        setShowCta(window.scrollY > 100);
+      }
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   const isPricing = pathname === "/pricing";
 
@@ -40,17 +56,15 @@ export function Nav() {
           <Link href="/pricing" className={isPricing ? "active" : ""}>
             Pricing
           </Link>
-          <Link href="/#personas">Who it's for</Link>
         </nav>
         <div className="nav-right">
-          <Link className="nav-signin" href="/#cta">
-            Log in
-          </Link>
-          <AnimatedButton
-            text="Get Atlas One"
-            variant="black"
-            href={isPricing ? "/pricing#plans" : "/#cta"}
-          />
+          <div className={`nav-cta-wrap ${showCta ? "visible" : ""}`}>
+            <AnimatedButton
+              text="Get Atlas One"
+              variant="black"
+              href="/pricing"
+            />
+          </div>
         </div>
       </div>
     </header>

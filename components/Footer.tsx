@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AtlasLogoIcon } from "./AnimatedButton";
+import { AtlasLogoIcon } from "./AtlasLogoIcon";
 
 export function Footer() {
   return (

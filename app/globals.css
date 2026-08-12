@@ -220,11 +220,10 @@ header.nav.scrolled {
 }
 
 .brand .mark {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   flex: none;
-  border-radius: 7px;
-  background: var(--ink);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,9 +231,14 @@ header.nav.scrolled {
 
 .brand .mark svg,
 .brand .mark .brand-logo-mark {
-  width: 15px;
-  height: 15px;
-  fill: #ffffff;
+  width: 28px;
+  height: 28px;
+  fill: var(--ink, #111111);
+}
+
+footer .brand .mark svg,
+footer .brand .mark .brand-logo-mark {
+  fill: var(--ink, #111111);
 }
 
 .brand-text {
@@ -276,17 +280,49 @@ footer .brand-name {
 }
 
 .nav-links a {
-  transition: color .15s;
+  position: relative;
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 500;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover {
+  color: #1d74d4;
+  background: rgba(35, 131, 226, 0.08);
+  box-shadow: 0 0 16px rgba(35, 131, 226, 0.3), 0 2px 8px rgba(35, 131, 226, 0.15);
+  text-shadow: 0 0 8px rgba(35, 131, 226, 0.35);
+  transform: translateY(-1px);
+}
+
+.nav-links a.active {
   color: var(--ink);
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .nav-right {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.nav-cta-wrap {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.96);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.3s ease;
+  pointer-events: none;
+}
+
+.nav-cta-wrap.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .nav-signin {
