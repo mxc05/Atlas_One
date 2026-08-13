@@ -19,8 +19,17 @@ export function Nav() {
         const heroSection = document.querySelector("section.hero");
         if (heroSection) {
           const rect = heroSection.getBoundingClientRect();
-          // Show navbar CTA strictly after the user crosses the entire Hero section
+          // Show navbar CTA strictly after crossing the entire Hero section
           setShowCta(rect.bottom <= 80);
+        } else {
+          setShowCta(window.scrollY > 800);
+        }
+      } else if (pathname === "/pricing") {
+        const faqSection = document.querySelector("section.faq-section, #faq");
+        if (faqSection) {
+          const rect = faqSection.getBoundingClientRect();
+          // Show navbar CTA strictly when user has scrolled to the FAQ section
+          setShowCta(rect.top <= window.innerHeight * 0.75);
         } else {
           setShowCta(window.scrollY > 800);
         }
@@ -35,6 +44,9 @@ export function Nav() {
   }, [pathname]);
 
   const isPricing = pathname === "/pricing";
+  const navCtaText = isPricing ? "Book a Demo" : "Get Atlas One";
+  const navCtaVariant = isPricing ? "blue" : "black";
+  const navCtaHref = isPricing ? undefined : "/pricing";
 
   return (
     <header className={`nav ${scrolled ? "scrolled" : ""}`} id="siteNav">
@@ -56,13 +68,22 @@ export function Nav() {
           <Link href="/pricing" className={isPricing ? "active" : ""}>
             Pricing
           </Link>
+          <button
+            type="button"
+            className="nav-btn-link"
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent("open-contact-modal"));
+            }}
+          >
+            Contact Us
+          </button>
         </nav>
         <div className="nav-right">
           <div className={`nav-cta-wrap ${showCta ? "visible" : ""}`}>
             <AnimatedButton
-              text="Get Atlas One"
-              variant="black"
-              href="/pricing"
+              text={navCtaText}
+              variant={navCtaVariant}
+              href={navCtaHref}
             />
           </div>
         </div>

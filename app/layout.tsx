@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { DemoModal } from "@/components/DemoModal";
+import { ContactModal } from "@/components/ContactModal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <DemoModal />
+        <ContactModal />
       </body>
     </html>
   );

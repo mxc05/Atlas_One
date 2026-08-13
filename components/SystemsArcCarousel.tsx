@@ -145,9 +145,7 @@ export function SystemsArcCarousel() {
             <path d="M12 8v5l3 2" />
           </svg>
           <p>
-            <b>Almost nothing here stands alone.</b> An invoice depends on its client for GST defaults. A receipt depends on
-            its invoice's TDS. GST Ledger and PL Statement both depend on invoices and expenses tagged to the right month
-            — and the Financial Year Summary depends on all twelve months agreeing.
+            <b>Nothing stands alone.</b> Every piece is connected, traceable, and contributes to a complete picture of your business.
           </p>
         </div>
       </div>
