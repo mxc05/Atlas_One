@@ -35,6 +35,7 @@ export type PricingPlan = {
   btnLink: string;
   featured?: boolean;
   badge?: string;
+  isOneTime?: boolean;
   features: { text: string; included: boolean }[];
 };
 
@@ -230,8 +231,8 @@ export const personas: Persona[] = [
 export const pricingPlans: PricingPlan[] = [
   {
     name: 'Atlas One',
-    priceMonthly: '₹2,499',
-    priceAnnual: '₹2,499',
+    priceMonthly: '₹4,999',
+    priceAnnual: '₹4,999',
     subMonthly: 'one-time payment — lifetime access',
     subAnnual: 'one-time payment — lifetime access',
     desc: 'For freelancers & solo agencies who want their complete business financials & GST in one quiet workspace.',
@@ -276,7 +277,7 @@ export const faqItems: FAQItem[] = [
   },
   {
     q: 'Is this a subscription?',
-    a: 'No, it is a one-time payment of ₹2,499. Every future update is included.',
+    a: 'No, it is a one-time payment of ₹4,999. Every future update is included.',
   },
   {
     q: 'What if Indian tax law is ambiguous for my case?',

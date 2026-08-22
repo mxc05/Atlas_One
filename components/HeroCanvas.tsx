@@ -54,7 +54,7 @@ export function HeroCanvas() {
       <div className="hero-blob b1" ref={blob1Ref} />
       <div className="hero-blob b2" ref={blob2Ref} />
       <div className="hero-blob b3" ref={blob3Ref} />
-      <canvas id="dotnet-canvas" ref={canvasRef} />
+      <canvas className="dotnet-canvas" ref={canvasRef} />
     </>
   );
 }

@@ -3,6 +3,7 @@
 import { useArcCarousel } from "@/hooks/useArcCarousel";
 import { systemRegions } from "@/lib/content";
 import { useReveal } from "@/hooks/useReveal";
+import { HeroCanvas } from "./HeroCanvas";
 
 export function SystemsArcCarousel() {
   const sectionRef = useReveal();
@@ -10,8 +11,9 @@ export function SystemsArcCarousel() {
     useArcCarousel(systemRegions);
 
   return (
-    <section className="systems reveal" id="systems" ref={sectionRef}>
-      <div className="wrap">
+    <section className="systems reveal" id="systems" ref={sectionRef} style={{ position: "relative", overflow: "hidden" }}>
+      <HeroCanvas />
+      <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
         <div className="section-head center">
           <div className="eyebrow" style={{ justifyContent: "center", display: "flex" }}>
             The systems in place
@@ -139,11 +141,7 @@ export function SystemsArcCarousel() {
 
         <div className="arc-bottom-hint">DRAG — SCROLL</div>
 
-        <div className="relation-note" style={{ marginTop: "56px" }}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 8v5l3 2" />
-          </svg>
+        <div className="relation-note">
           <p>
             <b>Nothing stands alone.</b> Every piece is connected, traceable, and contributes to a complete picture of your business.
           </p>
