@@ -90,28 +90,33 @@ export function Footer() {
               </span>
             </p>
           </div>
-          <div className="foot-col">
-            <h5>Quick Links</h5>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "100px 100px 100px",
-                gap: "6px 20px",
-              }}
-            >
-              <Link href="/#highlights">Highlights</Link>
-              <Link href="/#systems">Systems</Link>
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.dispatchEvent(new CustomEvent("open-contact-modal"));
-                }}
-              >
-                Contact Us
-              </a>
-              <Link href="/pricing">Pricing</Link>
-              <Link href="/#personas">Who it's for</Link>
+          <div className="foot-cols-wrap">
+            <div className="foot-col">
+              <h5>Quick Links</h5>
+              <div className="foot-col-links">
+                <Link href="/#highlights">Product</Link>
+                <Link href="/#systems">Systems</Link>
+                <Link href="/pricing">Pricing</Link>
+                <Link href="/pricing#faq">FAQs</Link>
+                <Link href="/#personas">Who it's for</Link>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.dispatchEvent(new CustomEvent("open-contact-modal"));
+                  }}
+                >
+                  Contact Us
+                </a>
+              </div>
+            </div>
+            <div className="foot-col">
+              <h5>Legal</h5>
+              <div className="foot-col-links">
+                <Link href="/privacy">Privacy Policy</Link>
+                <Link href="/refund">Refund Policy</Link>
+                <Link href="/terms">Terms of Service</Link>
+              </div>
             </div>
           </div>
         </div>

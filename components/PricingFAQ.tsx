@@ -22,7 +22,7 @@ export function PricingFAQ() {
                     <path d="M6 9l6 6 6-6" />
                   </svg>
                 </summary>
-                <p className="a-text">{item.a}</p>
+                <p className="a-text" dangerouslySetInnerHTML={{ __html: item.a }} />
               </details>
             ))}
           </div>

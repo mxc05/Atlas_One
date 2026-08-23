@@ -52,7 +52,7 @@ export function SpotlightSection({
                 <span>FY 2026–27</span>
               </div>
               <div className="gauge-warn">
-                ⚠️ At this pace you'll cross the threshold by <b>November</b>. Plan registration on your own schedule.
+                🟡 Total Revenue nearing 20L: Get GST registration done
               </div>
             </div>
           )}

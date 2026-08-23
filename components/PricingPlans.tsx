@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { pricingPlans } from "@/lib/content";
 import { useReveal } from "@/hooks/useReveal";
 import { AnimatedButton } from "./AnimatedButton";
@@ -17,7 +18,6 @@ export function PricingPlans() {
               <div className="plan-name">{plan.name}</div>
               <div className="plan-price">
                 <span className="amt price-amt">{plan.priceMonthly}</span>
-                <span className="per"> one-time</span>
               </div>
               <div className="plan-sub price-sub">{plan.subMonthly}</div>
               <p className="plan-desc">{plan.desc}</p>
@@ -37,6 +37,24 @@ export function PricingPlans() {
                   </li>
                 ))}
               </ul>
+              <p
+                style={{
+                  marginTop: "20px",
+                  paddingTop: "16px",
+                  borderTop: "1px solid var(--border-soft)",
+                  fontSize: "12.5px",
+                  color: "var(--muted)",
+                  lineHeight: 1.5,
+                }}
+              >
+                Lifetime access to Atlas One itself — built on Notion&apos;s free tier as of today.{" "}
+                <Link
+                  href="/terms"
+                  style={{ color: "var(--ink)", textDecoration: "underline", fontWeight: 500 }}
+                >
+                  See Terms for details.
+                </Link>
+              </p>
             </div>
           ))}
         </div>

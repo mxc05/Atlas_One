@@ -242,12 +242,17 @@ export const pricingPlans: PricingPlan[] = [
     badge: 'Lifetime Access',
     isOneTime: true,
     features: [
+      { text: 'CRM with client history', included: true },
+      { text: 'Project tracker with delivery tracking', included: true },
       { text: 'Unlimited clients & invoices', included: true },
+      { text: 'Cash-basis income tracking — billed vs. received', included: true },
+      { text: 'GST threshold tracking with early warnings', included: true },
       { text: 'Full GST Ledger & PL Statement', included: true },
       { text: 'Presumptive vs. Actual comparison', included: true },
       { text: 'Document Vault & Overdue Alerts', included: true },
       { text: 'Advance Tax Tracker', included: true },
-      { text: '15 Connected Systems Included', included: true },
+      { text: '15 Connected Systems — One entry updates everything downstream', included: true },
+      { text: 'Financial Year Summary', included: true },
       { text: 'Lifetime Access — No Subscriptions', included: true },
     ],
   },
@@ -267,28 +272,143 @@ export const comparisonTable = [
 ];
 
 export const faqItems: FAQItem[] = [
+  // General
+  {
+    q: 'What is Atlas One?',
+    a: 'Atlas One is a business organization system built specifically for Indian freelancers, consultants, and solo-run agencies. It connects your clients, projects, invoices, payments, expenses, and GST/tax position in one place, so entering one real event — an invoice raised, a payment received — updates everything downstream that depends on it, instead of you re-entering the same number in four different places.',
+  },
+  {
+    q: 'Who is this actually for?',
+    a: 'Independent professionals like content creators, social media managers, graphic designers, video editors, developers, consultants, marketers who invoice clients directly. If you\'re currently tracking clients in one tool, projects in another, invoices in yet another tool, payments in your bank app, and expenses in a folder of email receipts, this is built for exactly that gap.',
+  },
+  {
+    q: 'Is Atlas One an accounting software, like Zoho Books or QuickBooks?',
+    a: 'Not quite. General accounting software is built for accrual-basis businesses with formal books. Atlas One starts from a different default — cash-basis income (you\'re only taxed, mentally, on money you\'ve actually received) — and is purpose-built around the specific decisions Indian freelancers face: GST threshold timing, presumptive vs. actual taxation, and TDS reconciliation. It\'s narrower by design, not a general ledger.',
+  },
   {
     q: 'Does Atlas One file my taxes for me?',
-    a: 'No. GSTR and ITR filings still happen on the government portal or through your CA. Atlas One prepares and organizes the numbers; it does not submit anything.',
+    a: 'No, Atlas One does not file any return, does not calculate your final tax liability, and does not make legal judgment calls on ambiguous tax questions — it flags those for you to confirm with your CA instead of guessing. Think of it as showing up to your CA conversation with clean, organized numbers instead of a WhatsApp thread of screenshots.',
   },
   {
-    q: 'Do I need to be GST-registered to use it?',
-    a: 'No. Atlas One has a Simple View for non-registered users and a Full View with GST detail for registered ones; it adapts to you.',
+    q: 'Do I need to know Notion to use this?',
+    a: 'Basic comfort with Notion (clicking into a database, filling a field) is enough — you don\'t need to build or understand the underlying formulas.',
+  },
+
+  // GST & Tax
+  {
+    q: 'Does Atlas One file my GST or income tax returns?',
+    a: 'No. GSTR and ITR filings still happen at your end on the government portal or through your CA. Atlas One prepares and organizes the numbers for reference; it doesn\'t calculate final tax liability or submit anything anywhere on your behalf.',
   },
   {
-    q: 'Is this a subscription?',
-    a: 'No, it is a one-time payment of ₹4,999. Every future update is included.',
+    q: 'How does the GST threshold warning actually work?',
+    a: 'Atlas One tracks your billing as you invoice clients throughout the year and compares it against the applicable GST registration threshold for your situation (which varies by state and category). As you approach it, you\'ll see a clear warning well before the deadline — the goal is to make registration a decision you make on your own schedule, not a scramble when a CA points out you\'ve already crossed it.',
   },
   {
-    q: 'What if Indian tax law is ambiguous for my case?',
-    a: 'Atlas One surfaces a clear confirm-with-your-CA flag rather than guessing. It computes the arithmetic, not the judgment calls.',
+    q: 'Can I fully rely on the threshold calculation without double-checking?',
+    a: 'Treat it as an early-warning system, not a final legal determination. GST thresholds and rules can change, and edge cases (special category states, specific types of work) genuinely need a human judgment call — which is exactly what Atlas One flags rather than silently guessing at. Always confirm registration timing with your CA before or as you approach the threshold.',
   },
   {
-    q: 'I have multiple income streams. Does it handle that?',
-    a: 'Yes, it is built for freelancers with mixed income types, domestic and foreign clients alike.',
+    q: 'What\'s "presumptive vs. actual" taxation, and why does Atlas One show both?',
+    a: 'They\'re two different legal ways to calculate your taxable profit — presumptive taxation assumes a fixed percentage of your revenue is profit (simpler, less bookkeeping); actual taxation is your real profit after deducting real expenses (often higher, if your expenses are low). Which one is better depends on your specific numbers. Atlas One calculates both, side by side, based on what you\'ve entered, so you get a fair comparison instead of something you have to research or ask your CA to estimate for you from scratch. Atlas One doesn\'t tell you which to file under — that decision, and its legal consequences, is yours and your CA\'s to make.',
   },
   {
-    q: 'What happens after I buy?',
-    a: 'You get lifetime access and every future update, plus a 7-day money-back guarantee if it is not right for you.',
+    q: 'I\'m not GST-registered. Is Atlas One still useful for me?',
+    a: 'Yes — Atlas One has a "Non GST View" for non-GST-registered users that hides GST-specific calculations you don\'t need yet, and its main job for you is watching the threshold so you know when that might change.',
+  },
+  {
+    q: 'Tax rules change every year. Does Atlas One stay current?',
+    a: 'All future updates to Atlas One will be shared and communicated to you over email.',
+  },
+  {
+    q: 'Does Atlas One calculate what I\'ll actually owe in tax?',
+    a: 'No — there\'s no income-tax slab calculator. Atlas One shows you Deemed Profit and Actual Profit as two computed figures; what your final tax liability is, and which method to use, is a decision for you and your CA.',
+  },
+
+  // Your Data & Privacy
+  {
+    q: 'Where does my financial data actually live?',
+    a: 'In your own account — not on Atlas One\'s or Controve\'s servers. Atlas One is delivered as a system you duplicate into your own Notion account workspace; everything you enter from that point stays there.',
+  },
+  {
+    q: 'Does Controve see my invoices, clients, or financial numbers?',
+    a: 'No. Once you\'ve duplicated the template, we have no technical access to what you enter into it.',
+  },
+  {
+    q: 'Can I share my Atlas One workspace with my CA or tax consultant?',
+    a: 'Yes — that\'s entirely your own action, using your own account\'s sharing controls (e.g., inviting them into your Notion workspace). We\'re not involved in or accountable for that sharing; it\'s between you and your tax advisor.',
+  },
+  {
+    q: 'Is my data secure?',
+    a: 'Its security is governed by the platform your account is on (Notion\'s own security practices), since that\'s where it actually lives — not by us. We recommend reviewing that platform\'s own security documentation if this matters to your decision.',
+  },
+  {
+    q: 'What happens to my data if I stop using Atlas One?',
+    a: 'The data remain within your account inside Notion platform.',
+  },
+  {
+    q: 'Can I export my data?',
+    a: 'Yes, using your account platform\'s own export tools (e.g., Notion\'s CSV/Markdown export), since the data is fully yours and fully in your control.',
+  },
+
+  // Pricing & Getting Started
+  {
+    q: 'How much does Atlas One cost?',
+    a: 'Check the pricing section — <a href="/pricing">click here</a>.',
+  },
+  {
+    q: 'Is this a one-time purchase or a subscription?',
+    a: 'A one-time purchase — pay once for lifetime access to Atlas One itself, with no subscriptions or recurring fees from us. Atlas One runs on Notion\'s free tier as of today — continued free access depends on Notion\'s own policies remaining as they are, which is beyond our purview. See our Terms for details — <a href="/terms">click here</a>.',
+  },
+  {
+    q: 'What\'s your refund policy?',
+    a: 'Refer to the Refund policy — <a href="/refund">click here</a>.',
+  },
+  {
+    q: 'Do I need a paid Notion plan to use Atlas One?',
+    a: 'No, this is built around Notion\'s current free-tier plan — subject to change if Notion updates its own policies.',
+  },
+  {
+    q: 'Is there a demo I can try before buying?',
+    a: 'You may request a demo by filling out the Book a Demo form.',
+  },
+  {
+    q: 'What do I actually get after I purchase?',
+    a: 'You will receive an email from us which shall give you further guidance on the onboarding process.',
+  },
+
+  // Using Atlas One Day to Day
+  {
+    q: 'What\'s the "traffic light" system I keep seeing (red/yellow/green)?',
+    a: 'A consistent status vocabulary used across invoices, projects, and tax obligations: red for overdue, yellow for due soon, green for on track, a checkmark for complete, grey for not applicable, and a distinct paused state. Once you recognize it in one place, you can read the status of anything in the system at a glance.',
+  },
+  {
+    q: 'What if I leave a field blank, like an invoice\'s GST status?',
+    a: 'Atlas One never silently assumes a safe default. A blank GST status shows zero GST, not a guess; a missing due date shows an explicit "not set" warning rather than a false-safe green light. If something looks incomplete, it\'s meant to look incomplete, not confidently wrong.',
+  },
+  {
+    q: 'What if a number looks wrong?',
+    a: 'Every calculated figure in Atlas One is meant to be traceable back to the real transactions that produced it — trace it back to the linked invoice, receipt, or expense behind it first. Always confirm anything compliance-critical with your CA before acting on it.',
+  },
+  {
+    q: 'Can I use Atlas One on my phone?',
+    a: 'You can use Atlas One on your phone though the Notion app.',
+  },
+
+  // Support
+  {
+    q: 'What if I run into a problem or have a question?',
+    a: 'You can reach out to us on email.',
+  },
+  {
+    q: 'Do you offer help getting set up?',
+    a: 'We will guide on the entire onboarding process and help you set it up.',
+  },
+  {
+    q: 'Can I request a feature or report something that seems off in the app?',
+    a: 'Yes — feature suggestions and reporting bugs are always welcome. It helps us improve the tool you\'ll use. Reach out to us at hello@controve.com.',
+  },
+  {
+    q: 'Can I get a custom build for my specific workflow?',
+    a: 'Yes — if Atlas One\'s standard system doesn\'t quite fit how you work, we\'re happy to discuss a custom build tailored to your workflow. Reach out to us at hello@controve.com to talk through what you need.',
   },
 ];
