@@ -2730,3 +2730,241 @@ footer {
   max-width: 420px;
   margin: 0 auto;
 }
+
+/* ============ PAYMENT SUCCESS PAGE ============ */
+.success-page-wrap {
+  padding: 120px 0 100px;
+  background: var(--bg);
+  min-height: 80vh;
+}
+
+.success-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.success-badge-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #dbeddb;
+  color: #256b3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 24px rgba(37, 107, 58, 0.22);
+  animation: pulseCheck 2s ease-in-out infinite;
+}
+
+@keyframes pulseCheck {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 24px rgba(37, 107, 58, 0.22);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 36px rgba(37, 107, 58, 0.38);
+  }
+}
+
+.success-badge-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.success-pill {
+  margin-bottom: 16px;
+}
+
+.dotping.green {
+  background: #256b3a;
+}
+
+.success-title {
+  margin-bottom: 16px;
+}
+
+.success-lede {
+  margin-bottom: 24px;
+}
+
+.payment-ref-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  border-radius: 100px;
+  margin-bottom: 36px;
+  box-shadow: var(--shadow-sm);
+  font-size: 13.5px;
+}
+
+.ref-label {
+  color: var(--muted-2);
+  font-weight: 500;
+}
+
+.ref-code {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--blue);
+  background: var(--blue-bg);
+  padding: 3px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.03em;
+}
+
+.ref-code.green-text {
+  color: #256b3a;
+  background: #dbeddb;
+}
+
+.success-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px 36px;
+  box-shadow: var(--shadow-lg);
+  text-align: left;
+  margin-bottom: 36px;
+}
+
+.success-card-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+.steps-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  position: relative;
+}
+
+.timeline-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  bottom: -20px;
+  width: 2px;
+  background: var(--border-soft);
+}
+
+.step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  color: var(--muted-2);
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  z-index: 1;
+  border: 1px solid var(--border);
+}
+
+.step-num.highlight {
+  background: var(--blue);
+  color: #ffffff;
+  border-color: var(--blue);
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.35);
+}
+
+.step-content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.step-content p {
+  font-size: 14.5px;
+  color: #37352f;
+  line-height: 1.55;
+}
+
+.success-support-note {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  color: var(--muted-2);
+  line-height: 1.5;
+}
+
+.success-support-note svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--blue);
+}
+
+.support-email-link {
+  color: var(--blue);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.success-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-success-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn-success-home:hover {
+  opacity: 0.9;
+}
+
+.btn-success-support {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btn-success-support:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
