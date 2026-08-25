@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const businessEmail = process.env.BUSINESS_EMAIL || "hello@controve.com";
+    const businessEmail = process.env.BUSINESS_EMAIL || "hello@controve.in";
     const resendApiKey = process.env.RESEND_API_KEY;
 
     // Rich HTML email for the Business / Team

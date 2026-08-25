@@ -100,8 +100,8 @@ export default function TermsPage() {
           <h2>11. Contact Us</h2>
           <p>
             If you have questions about these Terms, please contact us at:{" "}
-            <a href="mailto:hello@controve.com" style={{ color: "var(--blue)", textDecoration: "underline" }}>
-              hello@controve.com
+            <a href="mailto:support@controve.in" style={{ color: "var(--blue)", textDecoration: "underline" }}>
+              support@controve.in
             </a>
           </p>
         </div>

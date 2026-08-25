@@ -88,8 +88,8 @@ function SuccessContent() {
             </svg>
             <span>
               Have questions or need help sooner? Contact us anytime at{" "}
-              <a href="mailto:hello@controve.com" className="support-email-link">
-                hello@controve.com
+              <a href="mailto:support@controve.in" className="support-email-link">
+                support@controve.in
               </a>.
             </span>
           </div>
@@ -101,7 +101,7 @@ function SuccessContent() {
             Return to Homepage
           </Link>
           <a
-            href="mailto:hello@controve.com"
+            href="mailto:support@controve.in"
             className="btn-success-support"
           >
             Contact Support

@@ -7,7 +7,7 @@ import { HeroCanvas } from "./HeroCanvas";
 
 export function SystemsArcCarousel() {
   const sectionRef = useReveal();
-  const { stageRef, viewportRef, cardsState, handleCardClick, handleMouseEnter, handleMouseLeave } =
+  const { stageRef, viewportRef, cardsState, handleCardClick, handleMouseEnter, handleMouseLeave, moveOne } =
     useArcCarousel(systemRegions);
 
   return (
@@ -139,7 +139,41 @@ export function SystemsArcCarousel() {
           </div>
         </div>
 
-        <div className="arc-bottom-hint">DRAG — SCROLL</div>
+        <div className="arc-controls-bar">
+          <button
+            type="button"
+            className="arc-arrow-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              moveOne(1);
+            }}
+            aria-label="Previous system card (Scroll Up)"
+            title="Previous system card"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="18 15 12 9 6 15" />
+            </svg>
+          </button>
+
+          <span className="arc-bottom-hint-text">DRAG — SCROLL</span>
+
+          <button
+            type="button"
+            className="arc-arrow-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              moveOne(-1);
+            }}
+            aria-label="Next system card (Scroll Down)"
+            title="Next system card"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+        </div>
 
         <div className="relation-note">
           <p>

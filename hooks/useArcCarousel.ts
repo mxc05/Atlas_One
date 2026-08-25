@@ -40,8 +40,10 @@ export function useArcCarousel(regions: SystemRegion[]) {
   const stageHeightRef = useRef(350);
 
   const takeControl = useCallback(() => {
-    manualRef.current = true;
-    targetRef.current = valueRef.current;
+    if (!manualRef.current) {
+      manualRef.current = true;
+      targetRef.current = Math.round(valueRef.current);
+    }
   }, []);
 
   const moveOne = useCallback(
@@ -100,7 +102,8 @@ export function useArcCarousel(regions: SystemRegion[]) {
     };
 
     const onPointerDown = (e: PointerEvent) => {
-      takeControl();
+      manualRef.current = true;
+      targetRef.current = valueRef.current;
       draggingRef.current = true;
       draggedRef.current = false;
       startYRef.current = e.clientY;
@@ -115,7 +118,7 @@ export function useArcCarousel(regions: SystemRegion[]) {
       if (!draggingRef.current) return;
       const deltaY = e.clientY - startYRef.current;
       if (Math.abs(deltaY) > 4) draggedRef.current = true;
-      valueRef.current = startValueRef.current - deltaY / (stageHeightRef.current * 0.45);
+      valueRef.current = startValueRef.current + deltaY / (stageHeightRef.current * 0.45);
       targetRef.current = valueRef.current;
     };
 
@@ -253,5 +256,6 @@ export function useArcCarousel(regions: SystemRegion[]) {
     handleCardClick,
     handleMouseEnter,
     handleMouseLeave,
+    moveOne,
   };
 }

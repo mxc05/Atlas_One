@@ -65,10 +65,10 @@ export function Footer() {
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
                 <a
-                  href="mailto:hello@controve.com"
+                  href="mailto:hello@controve.in"
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  hello@controve.com
+                  hello@controve.in
                 </a>
               </span>
               <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>

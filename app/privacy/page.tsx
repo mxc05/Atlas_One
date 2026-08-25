@@ -107,8 +107,8 @@ export default function PrivacyPolicyPage() {
           <h2>8. Grievance Officer & Contact</h2>
           <p>
             To exercise these rights regarding data we do hold or for questions about this Policy, contact us at:{" "}
-            <a href="mailto:hello@controve.com" style={{ color: "var(--blue)", textDecoration: "underline" }}>
-              hello@controve.com
+            <a href="mailto:support@controve.in" style={{ color: "var(--blue)", textDecoration: "underline" }}>
+              support@controve.in
             </a>
           </p>
 

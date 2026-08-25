@@ -405,10 +405,10 @@ export const faqItems: FAQItem[] = [
   },
   {
     q: 'Can I request a feature or report something that seems off in the app?',
-    a: 'Yes — feature suggestions and reporting bugs are always welcome. It helps us improve the tool you\'ll use. Reach out to us at hello@controve.com.',
+    a: 'Yes — feature suggestions and reporting bugs are always welcome. It helps us improve the tool you\'ll use. Reach out to us at support@controve.in.',
   },
   {
     q: 'Can I get a custom build for my specific workflow?',
-    a: 'Yes — if Atlas One\'s standard system doesn\'t quite fit how you work, we\'re happy to discuss a custom build tailored to your workflow. Reach out to us at hello@controve.com to talk through what you need.',
+    a: 'Yes — if Atlas One\'s standard system doesn\'t quite fit how you work, we\'re happy to discuss a custom build tailored to your workflow. Reach out to us at hello@controve.in to talk through what you need.',
   },
 ];
