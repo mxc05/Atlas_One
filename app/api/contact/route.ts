@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendEmail } from "@/lib/mailer";
 
 export async function POST(req: Request) {
   try {
@@ -12,7 +13,6 @@ export async function POST(req: Request) {
       );
     }
 
-    const resendApiKey = process.env.RESEND_API_KEY;
     const businessEmail = process.env.BUSINESS_EMAIL || "hello@controve.in";
 
     // Styled HTML Email for Internal Team Notification
@@ -105,48 +105,22 @@ export async function POST(req: Request) {
       </html>
     `;
 
-    if (resendApiKey && resendApiKey !== "your_resend_api_key_here") {
-      // 1. Email to Business
-      const resendBusiness = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "onboarding@resend.dev",
-          to: [businessEmail],
-          subject: `📬 New Contact Inquiry: ${name}`,
-          html: businessEmailHtml,
-        }),
-      });
-
-      // 2. Email to User
-      const resendUser = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "onboarding@resend.dev",
-          to: [email],
-          subject: `We've received your message — Atlas One`,
-          html: userEmailHtml,
-        }),
-      });
-
-      console.log("📬 [CONTACT FORM DISPATCH RESULT]");
-      console.log("Business Email Status:", resendBusiness.status);
-      console.log("User Email Status:", resendUser.status);
-    } else {
-      console.log("--------------------------------------------------");
-      console.log("📧 [CONTACT INQUIRY RECEIVED — DEV MODE / NO API KEY]");
-      console.log("BUSINESS NOTIFICATION TO:", businessEmail);
-      console.log("USER CONFIRMATION TO:", email);
-      console.log("DETAILS:", { name, email, phone, message });
-      console.log("--------------------------------------------------");
-    }
+    // Concurrently dispatch both emails in parallel via Promise.all
+    await Promise.all([
+      sendEmail({
+        from: businessEmail,
+        to: businessEmail,
+        subject: `📬 New Contact Inquiry: ${name}`,
+        html: businessEmailHtml,
+        replyTo: email,
+      }),
+      sendEmail({
+        from: businessEmail,
+        to: email,
+        subject: `We've received your message — Atlas One`,
+        html: userEmailHtml,
+      }),
+    ]);
 
     return NextResponse.json({ success: true, message: "Contact request processed successfully" });
   } catch (error) {

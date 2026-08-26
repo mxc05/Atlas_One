@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendEmail } from "@/lib/mailer";
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +14,6 @@ export async function POST(req: Request) {
     }
 
     const supportEmail = process.env.SUPPORT_EMAIL || "support@controve.in";
-    const resendApiKey = process.env.RESEND_API_KEY;
 
     // Styled HTML Email for Internal Support Team
     const internalSupportHtml = `
@@ -104,7 +104,7 @@ export async function POST(req: Request) {
             <div class="content">
               <p>Hi <strong>${name}</strong>,</p>
               <p>We've received your support request regarding <strong>${category || "Workspace Setup"}</strong>.</p>
-              <p>Our support team is reviewing your query and will reply directly to this email within 24 hours.</p>
+              <p>Our support team is reviewing your query and will get back to you within 24 hours.</p>
               ${
                 paymentId
                   ? `<p style="font-size:13px; color:#666;">Reference Order ID: <code>${paymentId}</code></p>`
@@ -121,48 +121,22 @@ export async function POST(req: Request) {
       </html>
     `;
 
-    if (resendApiKey && resendApiKey !== "your_resend_api_key_here") {
-      // 1. Email to Support Team
-      const resendSupport = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "onboarding@resend.dev",
-          to: [supportEmail],
-          subject: `🛠️ Support Ticket: ${category || "General"} - ${name}`,
-          html: internalSupportHtml,
-        }),
-      });
-
-      // 2. Email to Customer
-      const resendCustomer = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "onboarding@resend.dev",
-          to: [email],
-          subject: `Support Request Received — Atlas One`,
-          html: customerConfirmationHtml,
-        }),
-      });
-
-      console.log("📬 [SUPPORT TICKET DISPATCH]");
-      console.log("Support Desk Email Status:", resendSupport.status);
-      console.log("Customer Confirmation Email Status:", resendCustomer.status);
-    } else {
-      console.log("--------------------------------------------------");
-      console.log("📧 [SUPPORT TICKET SUBMITTED — DEV MODE]");
-      console.log("DESTINATION:", supportEmail);
-      console.log("CUSTOMER:", email);
-      console.log("DETAILS:", { name, email, paymentId, category, message });
-      console.log("--------------------------------------------------");
-    }
+    // Concurrently dispatch both emails in parallel via Promise.all
+    await Promise.all([
+      sendEmail({
+        from: supportEmail,
+        to: supportEmail,
+        subject: `🛠️ Support Ticket: ${category || "General"} - ${name}`,
+        html: internalSupportHtml,
+        replyTo: email,
+      }),
+      sendEmail({
+        from: supportEmail,
+        to: email,
+        subject: `Support Request Received — Atlas One`,
+        html: customerConfirmationHtml,
+      }),
+    ]);
 
     return NextResponse.json({ success: true, message: "Support ticket created successfully" });
   } catch (error) {

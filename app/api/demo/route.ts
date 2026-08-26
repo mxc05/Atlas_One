@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendEmail } from "@/lib/mailer";
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +14,6 @@ export async function POST(req: Request) {
     }
 
     const businessEmail = process.env.BUSINESS_EMAIL || "hello@controve.in";
-    const resendApiKey = process.env.RESEND_API_KEY;
 
     // Rich HTML email for the Business / Team
     const businessEmailHtml = `
@@ -126,56 +126,22 @@ export async function POST(req: Request) {
       </html>
     `;
 
-    // Send emails via Resend API if API Key is available
-    if (resendApiKey && resendApiKey !== "your_resend_api_key_here") {
-      // 1. Email to Business
-      const resendBusiness = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "onboarding@resend.dev",
-          to: [businessEmail],
-          subject: `⚡ New Demo Booking: ${name} (${city || state})`,
-          html: businessEmailHtml,
-        }),
-      });
-
-      const resendBusinessJson = await resendBusiness.json().catch(() => ({}));
-
-      // 2. Email to User
-      const resendUser = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "onboarding@resend.dev",
-          to: [email],
-          subject: `Your Atlas One Demo Request is Confirmed!`,
-          html: userEmailHtml,
-        }),
-      });
-
-      const resendUserJson = await resendUser.json().catch(() => ({}));
-
-      console.log("--------------------------------------------------");
-      console.log("📬 [RESEND DISPATCH RESULT]");
-      console.log("Business Email Status:", resendBusiness.status, resendBusinessJson);
-      console.log("User Email Status:", resendUser.status, resendUserJson);
-      console.log("--------------------------------------------------");
-    } else {
-      // Log for development environment when API key is placeholder
-      console.log("--------------------------------------------------");
-      console.log("📧 [DEMO REQUEST RECEIVED — DEV MODE / NO API KEY]");
-      console.log("BUSINESS NOTIFICATION TO:", businessEmail);
-      console.log("USER CONFIRMATION TO:", email);
-      console.log("DETAILS:", { name, email, phone, gstRegistered, workType, city, state, note });
-      console.log("--------------------------------------------------");
-    }
+    // Concurrently dispatch both emails in parallel via Promise.all
+    await Promise.all([
+      sendEmail({
+        from: businessEmail,
+        to: businessEmail,
+        subject: `⚡ New Demo Booking: ${name} (${city || state})`,
+        html: businessEmailHtml,
+        replyTo: email,
+      }),
+      sendEmail({
+        from: businessEmail,
+        to: email,
+        subject: `Your Atlas One Demo Request is Confirmed!`,
+        html: userEmailHtml,
+      }),
+    ]);
 
     return NextResponse.json({
       success: true,
