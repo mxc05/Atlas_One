@@ -20,6 +20,11 @@ export default function PrivacyPolicyPage() {
             handles information in connection with Atlas One (the <strong>&quot;Platform&quot;</strong>). It&apos;s written to comply with the Digital Personal Data Protection Act, 2023 (DPDP Act) and applicable Indian data protection law.
           </p>
 
+          <h2>Consent</h2>
+          <p>
+            By using our website, you hereby consent to our Privacy Policy and agree to its terms.
+          </p>
+
           <div className="legal-highlight-box">
             <strong>The most important thing to know:</strong> Atlas One is delivered as a template/system that you duplicate into your own account. Once duplicated, <strong>we do not have access to, and do not store, the client records, invoices, expenses, GST figures, or any other business data you enter into your copy.</strong> That data lives on the platform your account is on (e.g., Notion) and is governed by that platform&apos;s own privacy practices, which we encourage you to review separately.
           </div>
@@ -62,7 +67,7 @@ export default function PrivacyPolicyPage() {
             <li><strong>Law enforcement or regulators</strong>, only where legally required</li>
           </ul>
           <p>
-            We have no involvement in, and no visibility into, any sharing you choose to do within your own duplicated workspace — for example, if you invite your chartered accountant into your own Notion account. That sharing is entirely between you and the people you invite, using that platform&apos;s own sharing controls, and is your responsibility, not ours.
+            We have no involvement in, and no visibility into, any sharing you choose to do within your own duplicated workspace — for example, if you invite your team member, your chartered accountant or your client into your own Notion account. That sharing is entirely between you and the people you invite, using that platform&apos;s own sharing controls, and is your responsibility, not ours.
           </p>
 
           <h2>5. Your Business Data — Where It Actually Lives</h2>

@@ -32,12 +32,13 @@ export default function TermsPage() {
               <li>Submit anything to any government portal.</li>
               <li>Calculate your final tax liability or determine which tax scheme you should legally use.</li>
               <li>Provide legal, tax, or accounting advice.</li>
-              <li>Guarantee the accuracy of any GST threshold estimate or calculation.</li>
+              <li>Guarantee the accuracy of any GST threshold estimate or accounting calculation.</li>
             </ul>
           </div>
 
           <p>
-            Atlas One is a structure and set of formulas to help you organize numbers so you and your chartered accountant can make informed decisions. <strong>You are solely responsible for verifying all figures and for your actual tax and regulatory compliance.</strong> Nothing on the Platform constitutes professional tax, legal, or financial advice.
+            Atlas One is a structure and set of formulas to help you organize numbers so you and your chartered accountant can make informed decisions. <strong>You are solely responsible for verifying all figures and for your actual tax and regulatory compliance.</strong> Nothing on the Platform constitutes professional tax, legal, or financial advice and no advisor-client relationship is
+            created by your use of it.
           </p>
 
           <h2>2. Eligibility and Accounts</h2>
@@ -84,7 +85,12 @@ export default function TermsPage() {
 
           <h2>8. Disclaimers</h2>
           <p>
-            THE PLATFORM IS PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE.&quot; TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING FITNESS FOR A PARTICULAR PURPOSE AND ACCURACY OF ANY CALCULATION, FLAG, OR ESTIMATE THE PLATFORM PRODUCES.
+            THE PLATFORM IS PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE.&quot; TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING FITNESS FOR A PARTICULAR PURPOSE AND ACCURACY OF ANY CALCULATION, FLAG, OR ESTIMATE THE PLATFORM PRODUCES. GST rules, thresholds, and applicable rates
+            change; we do not guarantee the template reflects current law at all
+            times, and you should independently verify anything compliance-critical.
+            Because your data lives on a third-party platform, we are not
+            responsible for that platform's availability, security incidents, or
+            data loss.
           </p>
 
           <h2>9. Limitation of Liability</h2>
@@ -94,7 +100,7 @@ export default function TermsPage() {
 
           <h2>10. Governing Law</h2>
           <p>
-            These Terms are governed by the laws of India. Courts in India shall have exclusive jurisdiction regarding any dispute arising under these Terms.
+            These Terms are governed by the laws of India. Courts in Mumbai, India shall have exclusive jurisdiction regarding any dispute arising under these Terms.
           </p>
 
           <h2>11. Contact Us</h2>
