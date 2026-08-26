@@ -18,6 +18,10 @@ handles information in connection with Atlas One (the "**Platform**"). It's
 written to comply with the Digital Personal Data Protection Act, 2023
 (DPDP Act) and applicable Indian data protection law.
 
+## Consent
+
+By using our website, you hereby consent to our Privacy Policy and agree to its terms.
+
 **The most important thing to know:** Atlas One is delivered as a
 template/system that you duplicate into your own account. Once duplicated,
 **we do not have access to, and do not store, the client records,
@@ -79,7 +83,7 @@ We do not sell your data. We share the limited data we hold only with:
 
 We have no involvement in, and no visibility into, any sharing you choose
 to do within your own duplicated workspace — for example, if you invite
-your chartered accountant into your own Notion account. That sharing is
+your team member, your chartered accountant or your client into your own Notion account. That sharing is
 entirely between you and the people you invite, using that platform's own
 sharing controls, and is your responsibility, not ours.
 
@@ -127,13 +131,11 @@ For your business data inside your own duplicated workspace, exercise
 these rights directly with that platform (e.g., Notion), since we hold no
 copy of it.
 
-To exercise these rights regarding data we do hold, contact [privacy email].
+To exercise these rights regarding data we do hold, contact support@controve.in.
 
-## 8. Grievance Officer
+## 8. Grievance Officer & Contact
 
-**Name:** [Required — a named individual]
-**Email:** [grievance email]
-**Address:** [registered address]
+**Email:** support@controve.in
 
 We will acknowledge grievances within [statutory timeline] and aim to
 resolve them within [statutory timeline].
