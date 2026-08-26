@@ -1,15 +1,23 @@
 "use client";
 
-import { Suspense } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { SupportModal } from "@/components/SupportModal";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
-  const paymentId = searchParams.get("razorpay_payment_id") || searchParams.get("payment_id");
+  const paymentId = searchParams.get("razorpay_payment_id") || searchParams.get("payment_id") || "";
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
 
   return (
     <div className="success-page-wrap">
+      <SupportModal
+        isOpen={isSupportModalOpen}
+        onClose={() => setIsSupportModalOpen(false)}
+        defaultPaymentId={paymentId}
+      />
+
       <div className="wrap success-inner">
         {/* Animated Checkmark Badge */}
         <div className="success-badge-icon">
@@ -87,10 +95,15 @@ function SuccessContent() {
               <path d="M12 8h.01" />
             </svg>
             <span>
-              Have questions or need help sooner? Contact us anytime at{" "}
-              <a href="mailto:support@controve.in" className="support-email-link">
-                support@controve.in
-              </a>.
+              Have questions or need help sooner?{" "}
+              <button
+                type="button"
+                onClick={() => setIsSupportModalOpen(true)}
+                className="support-email-link-btn"
+              >
+                Submit a support ticket
+              </button>{" "}
+              or email us at <strong>support@controve.in</strong>.
             </span>
           </div>
         </div>
@@ -100,12 +113,13 @@ function SuccessContent() {
           <Link href="/" className="btn-success-home">
             Return to Homepage
           </Link>
-          <a
-            href="mailto:support@controve.in"
+          <button
+            type="button"
+            onClick={() => setIsSupportModalOpen(true)}
             className="btn-success-support"
           >
             Contact Support
-          </a>
+          </button>
         </div>
       </div>
     </div>

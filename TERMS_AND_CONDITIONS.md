@@ -40,8 +40,8 @@ never hosted, stored, or processed on Controve's own infrastructure.**
 - Calculate your final tax liability or determine which tax scheme
   (presumptive or actual) you should legally use
 - Provide legal, tax, or accounting advice
-- Guarantee the accuracy of any GST threshold estimate, deemed-profit
-  calculation, or compliance flag it shows you
+- Guarantee the accuracy of any GST threshold estimate or accounting 
+  calculation.
 - Share your data with your chartered accountant, or anyone else, on your
   behalf — any sharing you do (e.g., inviting your CA into your own
   workspace) happens entirely within your own account, under your own
@@ -60,9 +60,7 @@ created by your use of it.
 You must be at least 18 years old and legally capable of entering a binding
 contract under the Indian Contract Act, 1872. "Your account" refers to the
 account on the underlying platform (e.g., your own Notion account) into
-which you duplicate Atlas One, plus, if applicable, a lightweight Controve
-account used for purchase, license verification, and support. You are
-responsible for the security of both.
+which you duplicate Atlas One.
 
 ## 3. License to the Template/System
 
@@ -124,8 +122,8 @@ FITNESS FOR A PARTICULAR PURPOSE AND ACCURACY OF ANY CALCULATION, FLAG, OR
 ESTIMATE THE PLATFORM PRODUCES. GST rules, thresholds, and applicable rates
 change; we do not guarantee the template reflects current law at all
 times, and you should independently verify anything compliance-critical.
-Because your data lives on a third-party platform, we also disclaim
-responsibility for that platform's availability, security incidents, or
+Because your data lives on a third-party platform, we are not
+responsible for that platform's availability, security incidents, or
 data loss.
 
 ## 9. Limitation of Liability
