@@ -156,7 +156,7 @@ notified via [email/in-app notice].
 
 ## 13. Contact
 
-Questions about these Terms: [support email / registered address]
+Questions about these Terms: support@controve.in
 
 ---
 
