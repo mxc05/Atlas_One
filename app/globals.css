@@ -3008,6 +3008,7 @@ footer {
   font-weight: 600;
   border: 1px solid var(--border);
   text-decoration: none;
+  cursor: pointer;
   transition: background 0.2s ease;
 }
 
